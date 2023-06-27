@@ -26,6 +26,7 @@
       template:
         src: files/.Xclients
         dest: "/home/{{ user }}/.Xclients"
+        mode: u=rwx,g=r,o=r
 
     - name: Ensures .config/awesome dir exists
       file:
