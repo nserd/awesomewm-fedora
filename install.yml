@@ -24,8 +24,8 @@
 
     - name: Add .Xclient
       template:
-        src: files/.Xclient
-        dest: "/home/{{ user }}/.Xclient"
+        src: files/.Xclients
+        dest: "/home/{{ user }}/.Xclients"
 
     - name: Ensures .config/awesome dir exists
       file:
