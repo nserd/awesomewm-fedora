@@ -1,3 +1,5 @@
+# For Fedora Server netinst (basic installation)
+
 Preparation:
 ```
 sudo dnf install -y git && git clone https://github.com/nserd/awesomewm-fedora
@@ -7,5 +9,5 @@ cd awesomewm-fedora
 ```
 Run playbook:
 ```
-ansible-playbook install.sh -e user=nserd -D --ask-become-pass
+ansible-playbook install.yml -e user=nserd -D --ask-become-pass
 ```
