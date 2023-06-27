@@ -12,6 +12,7 @@
         name: "{{ item }}"
         state: present
       loop:
+        - bash-completion
         - "@base-x"
         - awesome
         - dbus-x11
