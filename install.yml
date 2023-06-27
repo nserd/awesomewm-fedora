@@ -1,7 +1,6 @@
 ---
 - hosts: localhost
   connection: local
-  become: yes
 
   vars:
     user: nserd
@@ -23,27 +22,22 @@
         - tar
         - tree
       register: packages
+      become: yes
 
     - name: Add .Xclient
       template:
         src: files/.Xclient
         dest: "/home/{{ user }}/.Xclient"
-        owner: "{{ user }}"
-        group: "{{ user }}"
 
     - name: Ensures .config/awesome dir exists
       file:
         path: "/home/{{ user }}/.config/awesome"
         state: directory
-        owner: "{{ user }}"
-        group: "{{ user }}"
 
     - name: Copy awesome config
       copy:
         src: /etc/xdg/awesome/rc.lua
         dest: "/home/{{ user }}/.config/awesome/rc.lua"
-        owner: "{{ user }}"
-        group: "{{ user }}"
       when: not ansible_check_mode
 
     - name: Xorg autostart setting
