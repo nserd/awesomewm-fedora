@@ -2,9 +2,6 @@
 - hosts: localhost
   connection: local
 
-  vars:
-    user: nserd
-
   tasks:
     - name: Install main packages
       dnf:
