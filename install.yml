@@ -12,6 +12,7 @@
         - "@base-x"
         - awesome
         - dbus-x11
+        - flatpak
         - vim
         - htop
         - glibc-langpack-ru
