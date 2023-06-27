@@ -22,7 +22,7 @@
       register: packages
       become: yes
 
-    - name: Add .Xclient
+    - name: Add .Xclients
       template:
         src: files/.Xclients
         dest: "/home/{{ user }}/.Xclients"
