@@ -35,6 +35,8 @@
       file:
         path: "/home/{{ user }}/.config/awesome"
         state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
 
     - name: Copy awesome config
       copy:
