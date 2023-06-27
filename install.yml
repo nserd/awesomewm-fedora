@@ -1,0 +1,44 @@
+---
+- hosts: localhost
+  connection: local
+  become: yes
+
+  vars:
+    user: nserd
+
+  tasks:
+    - name: Install main packages
+      dnf:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - "@base-x"
+        - awesome
+        - dbus-x11
+        - vim
+        - htop
+        - glibc-langpack-ru
+        - flameshot
+        - tar
+        - tree
+      register: packages
+
+    - name: Add .Xclient
+      template:
+        src: files/.Xclient
+        dest: "/home/{{ user }}/.Xclient"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+
+    - name: Copy awesome config
+      template:
+        src: /etc/xdg/awesome/rc.lua
+        dest: "/home/{{ user }}/.config/awesome/rc.lua"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+      when: not ansible_check_mode
+
+    - name: Xorg autostart setting
+      lineinfile:
+        dest: "/home/{{ user }}/.bash_profile"
+        line: "[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx"
