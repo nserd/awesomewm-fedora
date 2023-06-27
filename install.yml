@@ -31,7 +31,7 @@
         group: "{{ user }}"
 
     - name: Copy awesome config
-      template:
+      copy:
         src: /etc/xdg/awesome/rc.lua
         dest: "/home/{{ user }}/.config/awesome/rc.lua"
         owner: "{{ user }}"
