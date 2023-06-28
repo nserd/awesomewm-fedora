@@ -1,6 +1,6 @@
 ---
 - name: Awesome WM
-  tags: [base, awesome]
+  tags: [always, base, awesome]
   vars:
     awesome_config_dir: "/home/{{ user }}/.config/awesome"
 

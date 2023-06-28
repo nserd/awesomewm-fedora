@@ -29,7 +29,7 @@
 
     - name: Awesome WM
       include_tasks: tasks/awesome.yml
-      tags: [base, awesome]
+      tags: [always, base, awesome]
 
     - name: Kitty Terminal
       include_tasks: tasks/kitty.yml
