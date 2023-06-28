@@ -21,15 +21,15 @@
         - tree
       register: packages
       become: yes
-      tags: always
+      tags: base
 
     - name: Xorg
       include_tasks: tasks/xorg.yml
-      tags: [always, xorg]
+      tags: [base, xorg]
 
     - name: Awesome WM
       include_tasks: tasks/awesome.yml
-      tags: [always, awesome]
+      tags: [base, awesome]
 
     - name: Kitty Terminal
       include_tasks: tasks/kitty.yml

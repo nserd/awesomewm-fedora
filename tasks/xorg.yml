@@ -1,5 +1,7 @@
 ---
 - name: Xorg
+  tags: [base, xorg]
+
   block:
   - name: Add .Xclients
     template:

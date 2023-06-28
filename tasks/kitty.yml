@@ -1,5 +1,6 @@
 ---
 - name: Kitty Terminal
+  tags: kitty
   vars:
     kitty_config_dir: "/home/{{ user }}/.config/kitty"
 
