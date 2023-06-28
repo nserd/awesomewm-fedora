@@ -21,25 +21,16 @@
         - tree
       register: packages
       become: yes
+      tags: always
 
-    - name: Add .Xclients
-      template:
-        src: files/.Xclients
-        dest: "/home/{{ user }}/.Xclients"
-        mode: u=rwx,g=r,o=r
+    - name: Xorg
+      include_tasks: tasks/xorg.yml
+      tags: [always, xorg]
 
-    - name: Ensures .config/awesome dir exists
-      file:
-        path: "/home/{{ user }}/.config/awesome"
-        state: directory
+    - name: Awesome WM
+      include_tasks: tasks/awesome.yml
+      tags: [always, awesome]
 
-    - name: Copy awesome config
-      copy:
-        src: /etc/xdg/awesome/rc.lua
-        dest: "/home/{{ user }}/.config/awesome/rc.lua"
-      when: not ansible_check_mode
-
-    - name: Xorg autostart setting
-      lineinfile:
-        dest: "/home/{{ user }}/.bash_profile"
-        line: "[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx"
+    - name: Kitty Terminal
+      include_tasks: tasks/kitty.yml
+      tags: kitty

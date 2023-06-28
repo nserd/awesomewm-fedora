@@ -1,0 +1,20 @@
+---
+- name: Awesome WM
+  vars:
+    awesome_config_dir: "/home/{{ user }}/.config/awesome"
+
+  block:
+  - stat: path="{{ awesome_config_dir }}"
+    register: dir_awesome
+
+  - name: Create dir .config/awesome
+    file:
+      path: "{{ awesome_config_dir }}"
+      state: directory
+    when: not dir_awesome.stat.exists
+
+  - name: Copy awesome default config
+    copy:
+      src: /etc/xdg/awesome/rc.lua
+      dest: "{{ awesome_config_dir }}/rc.lua"
+    when: dir_awesome.stat.exists

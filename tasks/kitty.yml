@@ -1,0 +1,33 @@
+---
+- name: Kitty Terminal
+  vars:
+    kitty_config_dir: "/home/{{ user }}/.config/kitty"
+
+  block:
+  - name: Install kitty
+    dnf:
+      name: kitty
+      state: present
+    become: yes
+
+  - stat: path="{{ kitty_config_dir }}"
+    register: dir_kitty
+
+  - name: Create dir - {{ kitty_config_dir }}
+    file:
+      path: "{{ kitty_config_dir }}"
+      state: directory
+    when: not dir_kitty.stat.exists
+
+  - name: Add kitty config
+    copy:
+      src: files/kitty.conf
+      dest: "{{ kitty_config_dir }}/kitty.conf"
+    when: dir_kitty.stat.exists
+
+  - name: Change terminal in awesome config
+    lineinfile:
+      path: "/home/{{ user }}/.config/awesome/rc.lua"
+      regexp: "^terminal = "
+      line: terminal = "kitty"
+    when: dir_awesome.stat.exists
