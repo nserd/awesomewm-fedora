@@ -21,7 +21,7 @@
         - tree
       register: packages
       become: true
-      tags: base
+      tags: [always, base]
 
     - name: Xorg
       include_tasks: tasks/xorg.yml
