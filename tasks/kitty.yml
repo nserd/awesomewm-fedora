@@ -9,7 +9,7 @@
     dnf:
       name: kitty
       state: present
-    become: yes
+    become: true
 
   - stat: path="{{ kitty_config_dir }}"
     register: dir_kitty

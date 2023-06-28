@@ -20,7 +20,7 @@
         - tar
         - tree
       register: packages
-      become: yes
+      become: true
       tags: base
 
     - name: Xorg
