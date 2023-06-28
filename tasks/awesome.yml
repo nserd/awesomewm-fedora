@@ -8,7 +8,7 @@
   - stat: path="{{ awesome_config_dir }}"
     register: dir_awesome
 
-  - name: Create dir .config/awesome
+  - name: Create dir - {{ awesome_config_dir }}
     file:
       path: "{{ awesome_config_dir }}"
       state: directory
