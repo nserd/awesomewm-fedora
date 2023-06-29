@@ -4,7 +4,7 @@
 
   roles:
     - role: awesome
-      tags: [awesome, base]
+      tags: [awesome, minimal]
 
     - role: kitty
       tags: [kitty]
@@ -13,7 +13,7 @@
       tags: [picom]
 
   tasks:
-    - name: Install packages
+    - name: Install additional packages
       dnf:
         name: "{{ item }}"
         state: present
@@ -29,4 +29,4 @@
         - tree
         - chromium
       become: true
-      tags: [base]
+      tags: [minimal]
