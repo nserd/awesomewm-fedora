@@ -1,0 +1,1 @@
+kitty_config_dir: "/home/{{ user }}/.config/kitty"

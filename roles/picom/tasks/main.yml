@@ -1,0 +1,41 @@
+---
+- name: Install dependencies
+  dnf:
+    name: 
+      - dbus-devel 
+      - gcc 
+      - libconfig-devel
+      - libdrm-devel
+      - libev-devel
+      - libX11-devel
+      - libX11-xcb
+      - libXext-devel
+      - libxcb-devel
+      - mesa-libGL-devel
+      - meson
+      - pcre-devel
+      - pixman-devel
+      - uthash-devel
+      - xcb-util-image-devel
+      - xcb-util-renderutil-devel
+      - xorg-x11-proto-devel
+    state: present
+  become: true
+
+- name: Clone a repo - {{ repository }}
+  ansible.builtin.git:
+    repo: "{{ repository }}"
+    dest: /tmp/picom
+
+- name: Build picom
+  shell: meson --buildtype=release . build && ninja -C build
+  args:
+    chdir: /tmp/picom
+  when: not ansible_check_mode
+
+- name: Install picom
+  command: ninja -C build install
+  args:
+    chdir: /tmp/picom
+  become: true
+  when: not ansible_check_mode

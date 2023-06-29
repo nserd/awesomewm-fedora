@@ -2,15 +2,23 @@
 - hosts: localhost
   connection: local
 
+  roles:
+    - role: awesome
+      tags: [awesome]
+
+    - role: kitty
+      tags: [kitty]
+
+    - role: picom
+      tags: [picom]
+
   tasks:
-    - name: Install main packages
+    - name: Install additional packages
       dnf:
         name: "{{ item }}"
         state: present
       loop:
         - bash-completion
-        - "@base-x"
-        - awesome
         - dbus-x11
         - flatpak
         - vim
@@ -20,18 +28,4 @@
         - tar
         - tree
         - chromium
-      register: packages
       become: true
-      tags: [always, base]
-
-    - name: Xorg
-      include_tasks: tasks/xorg.yml
-      tags: [base, xorg]
-
-    - name: Awesome WM
-      include_tasks: tasks/awesome.yml
-      tags: [always, base, awesome]
-
-    - name: Kitty Terminal
-      include_tasks: tasks/kitty.yml
-      tags: kitty
