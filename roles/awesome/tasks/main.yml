@@ -35,7 +35,7 @@
   when: not dir_awesome.stat.exists
 
 - name: Copy default config
-  copy:
-    src: /etc/xdg/awesome/rc.lua
+  template:
+    src: files/rc.lua
     dest: "{{ awesome_config_dir }}/rc.lua"
   when: not (ansible_check_mode and not dir_awesome.stat.exists)

@@ -1,2 +1,2 @@
 awesome_config_dir: "/home/{{ user }}/.config/awesome"
-terminal: kitty
+awesome_default_theme: zenburn
