@@ -19,6 +19,7 @@
         - flameshot
         - tar
         - tree
+        - chromium
       register: packages
       become: true
       tags: [always, base]
