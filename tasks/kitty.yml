@@ -24,11 +24,11 @@
     copy:
       src: files/kitty.conf
       dest: "{{ kitty_config_dir }}/kitty.conf"
-    when: dir_kitty.stat.exists
+    when: not (ansible_check_mode and not dir_kitty.stat.exists)
 
   - name: Change terminal in awesome config
     lineinfile:
       path: "/home/{{ user }}/.config/awesome/rc.lua"
       regexp: "^terminal = "
       line: terminal = "kitty"
-    when: dir_awesome.stat.exists
+    when: not (ansible_check_mode and not dir_awesome.stat.exists)

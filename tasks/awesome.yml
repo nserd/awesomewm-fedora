@@ -18,4 +18,4 @@
     copy:
       src: /etc/xdg/awesome/rc.lua
       dest: "{{ awesome_config_dir }}/rc.lua"
-    when: dir_awesome.stat.exists
+    when: not (ansible_check_mode and not dir_awesome.stat.exists)
