@@ -1,3 +1,4 @@
+{% raw %}
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
@@ -45,6 +46,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
+{% endraw %}
 beautiful.init(gears.filesystem.get_themes_dir() .. "{{ awesome_default_theme }}/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
@@ -52,6 +54,7 @@ terminal = "{{ terminal | default ('xterm') }}"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
+{% raw %}
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -571,3 +574,4 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+{% endraw %}
