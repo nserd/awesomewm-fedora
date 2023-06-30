@@ -16,6 +16,6 @@
 
 - name: Install the packages
   community.general.flatpak:
-    name: "{{ items }}"
+    name: "{{ item }}"
     state: present
   loop: "{{ default_flatpak_packages | list + flatpak_packages | default([]) }}"
