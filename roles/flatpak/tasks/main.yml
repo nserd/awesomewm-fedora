@@ -1,5 +1,5 @@
 ---
-- name: Install flatpak
+- name: Install
   dnf:
     name: 
       - dbus-x11

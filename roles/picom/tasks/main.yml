@@ -34,13 +34,13 @@
       repo: "{{ picom_repository }}"
       dest: /tmp/picom
 
-  - name: Build picom
+  - name: Build
     shell: meson --buildtype=release . build && ninja -C build
     args:
       chdir: /tmp/picom
     when: not ansible_check_mode
 
-  - name: Add picom binary to /usr/local/bin/
+  - name: Add binary to /usr/local/bin/
     command: ninja -C build install
     args:
       chdir: /tmp/picom
