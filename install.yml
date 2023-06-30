@@ -28,5 +28,7 @@
         - tar
         - tree
         - chromium
+        - keepassxc
+        - rclone
       become: true
       tags: [minimal]
