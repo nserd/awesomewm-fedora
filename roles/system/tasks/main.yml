@@ -1,0 +1,34 @@
+---
+- name: Bash setup
+  block:
+    - name: Copy global bashrc
+      template:
+        src: files/bashrc
+        dest: /etc/bashrc
+      become: true
+
+    - name: Copy user .bashrc
+      template:
+        src: files/.bashrc
+        dest: "/home/{{ user }}/.bashrc"
+
+    - stat: path="{{ bashrc_dir }}"
+      register: dir_bashrc
+
+    - name: Create dir - {{ bashrc_dir }}
+      file:
+        path: "{{ bashrc_dir }}"
+        state: directory
+      when: not dir_bashrc.stat.exists
+    
+    - name: Copy aliases
+      template:
+        src: files/.bashrc.d/bash_aliases
+        dest: "{{ bashrc_dir }}/bash_aliases"
+  tags: [bash]
+
+- name: Keychrone fix
+  ansible.builtin.cron:
+    name: "Keychrone fix"
+    job: "echo 0 > /sys/module/hid_apple/parameters/fnmode"
+  become: true
