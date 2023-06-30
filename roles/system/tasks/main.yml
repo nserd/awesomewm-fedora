@@ -29,7 +29,7 @@
 
 - name: Install crontab
   dnf:
-    name: crontab
+    name: cronie
     state: present
   become: true
 
