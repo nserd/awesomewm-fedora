@@ -6,6 +6,9 @@
     - role: awesome
       tags: [awesome, minimal]
 
+    - role: flatpak
+      tags: [flatpak, mimimal]
+
     - role: kitty
       tags: [kitty]
 
@@ -19,8 +22,6 @@
         state: present
       loop:
         - bash-completion
-        - dbus-x11
-        - flatpak
         - vim
         - htop
         - glibc-langpack-ru
