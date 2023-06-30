@@ -27,6 +27,12 @@
         dest: "{{ bashrc_dir }}/bash_aliases"
   tags: [bash]
 
+- name: Install crontab
+  dnf:
+    name: crontab
+    state: present
+  become: true
+
 - name: Keychrone fix
   ansible.builtin.cron:
     name: "Keychrone fix"
