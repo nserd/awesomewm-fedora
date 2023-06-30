@@ -12,9 +12,10 @@
     name: flathub
     state: present
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+  become: true
 
 - name: Install the packages
   community.general.flatpak:
-    name: org.gnome.gedit
+    name: {{ items }}
     state: present
   loop: "{{ default_flatpak_packages | list + flatpak_packages | default([]) }}"
