@@ -1,1 +1,2 @@
-repository: "https://github.com/jonaburg/picom.git"
+picom_repository: "https://github.com/jonaburg/picom.git"
+picom_config_dir: "/home/{{ user }}/.config/picom"

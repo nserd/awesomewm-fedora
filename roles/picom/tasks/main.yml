@@ -22,9 +22,9 @@
     state: present
   become: true
 
-- name: Clone a repo - {{ repository }}
+- name: Clone a repo - {{ picom_repository }}
   ansible.builtin.git:
-    repo: "{{ repository }}"
+    repo: "{{ picom_repository }}"
     dest: /tmp/picom
 
 - name: Build picom
@@ -39,3 +39,18 @@
     chdir: /tmp/picom
   become: true
   when: not ansible_check_mode
+
+- stat: path="{{ picom_config_dir }}"
+  register: dir_picom
+
+- name: Create dir - {{ picom_config_dir }}
+  file:
+    path: "{{ picom_config_dir }}"
+    state: directory
+  when: not dir_picom.stat.exists
+
+- name: Copy default config
+  template:
+    src: files/picom.conf
+    dest: "{{ picom_config_dir }}/picom.conf"
+  when: not (ansible_check_mode and not dir_picom.stat.exists)
