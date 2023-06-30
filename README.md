@@ -9,5 +9,5 @@ cd awesomewm-fedora
 ```
 Run playbook:
 ```
-ansible-playbook install.yml -e user=nserd -D --ask-become-pass
+ansible-playbook install.yml -D --ask-become-pass
 ```

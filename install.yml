@@ -1,6 +1,8 @@
 ---
 - hosts: localhost
   connection: local
+  vars:
+    user: "{{ ansible_user_id }}"
 
   roles:
     - role: awesome
@@ -8,6 +10,9 @@
 
     - role: flatpak
       tags: [flatpak, mimimal]
+
+    - role: system
+      tags: [system, minimal]
 
     - role: kitty
       tags: [kitty]
@@ -31,5 +36,6 @@
         - chromium
         - keepassxc
         - rclone
+        - openssl
       become: true
       tags: [minimal]
