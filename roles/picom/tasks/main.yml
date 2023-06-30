@@ -22,23 +22,31 @@
     state: present
   become: true
 
-- name: Clone a repo - {{ picom_repository }}
-  ansible.builtin.git:
-    repo: "{{ picom_repository }}"
-    dest: /tmp/picom
-
-- name: Build picom
-  shell: meson --buildtype=release . build && ninja -C build
-  args:
-    chdir: /tmp/picom
-  when: not ansible_check_mode
+- name: Check if picom is installed
+  stat:
+    path: /usr/local/bin/picom
+  register: picom_binary
 
 - name: Install picom
-  command: ninja -C build install
-  args:
-    chdir: /tmp/picom
-  become: true
-  when: not ansible_check_mode
+  block:
+  - name: Clone a repo - {{ picom_repository }}
+    ansible.builtin.git:
+      repo: "{{ picom_repository }}"
+      dest: /tmp/picom
+
+  - name: Build picom
+    shell: meson --buildtype=release . build && ninja -C build
+    args:
+      chdir: /tmp/picom
+    when: not ansible_check_mode
+
+  - name: Add picom binary to /usr/local/bin/
+    command: ninja -C build install
+    args:
+      chdir: /tmp/picom
+    become: true
+    when: not ansible_check_mode
+  when: not picom_binary.stat.exists
 
 - stat: path="{{ picom_config_dir }}"
   register: dir_picom
