@@ -1,0 +1,11 @@
+{
+    "redhat.telemetry.enabled": false,
+    "workbench.colorTheme": "{{ vscode_theme }}",
+    "workbench.colorCustomizations": {
+        "{{ vscode_theme }}": {
+            "titleBar.activeBackground": "#191919cc",
+            "titleBar.activeForeground":"#ffffff"
+        }
+    },
+    "window.titleBarStyle": "custom"
+}

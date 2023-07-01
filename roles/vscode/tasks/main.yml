@@ -18,3 +18,8 @@
     name: code
     state: present
   become: true
+
+- name: Copy config
+  template:
+    src: files/settings.json
+    dest: "/home/{{ user }}/.config/Code/User/settings.json"
