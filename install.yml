@@ -40,5 +40,6 @@
         - keepassxc
         - rclone
         - openssl
+        - cryptsetup
       become: true
       tags: [minimal]
