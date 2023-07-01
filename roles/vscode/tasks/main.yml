@@ -1,0 +1,20 @@
+---
+- name: Import key
+  command: rpm --import https://packages.microsoft.com/keys/microsoft.asc
+  become: true
+
+- name: Add config
+  copy:
+    src: files/vscode.repo
+    dest: /etc/yum.repos.d/vscode.repo
+  become: true
+
+- name: Check update
+  dnf:
+    update_cache: true
+
+- name: Install
+  dnf:
+    name: code
+    state: present
+  become: true

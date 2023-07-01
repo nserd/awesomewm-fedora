@@ -20,6 +20,9 @@
     - role: picom
       tags: [picom]
 
+    - role: vscode
+      tags: [vscode]
+
   tasks:
     - name: Install additional packages
       dnf:
