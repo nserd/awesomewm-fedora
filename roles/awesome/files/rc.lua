@@ -227,7 +227,7 @@ beautiful.useless_gap = 3
 
 --- {{{ Autostart
 awful.spawn.with_shell(
-    -- 'picom -b'
+    'which picom >/dev/null 2>&1 && picom -b'
 )
 --- }}}
 
