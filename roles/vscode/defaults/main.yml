@@ -1,1 +1,2 @@
+vscode_user_config_dir: "/home/{{ user }}/.config/Code/User"
 vscode_theme: Default Dark modern
