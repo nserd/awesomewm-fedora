@@ -49,7 +49,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 {% endraw %}
-beautiful.init(gears.filesystem.get_themes_dir() .. "{{ awesome_default_theme }}/theme.lua")
+beautiful.init("/home/{{ user }}/.config/awesome/themes/{{ awesome_theme | default(awesome_default_theme) }}/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "{{ terminal | default ('xterm') }}"
@@ -174,7 +174,11 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[4])
+    if s == screen.primary then
+        awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[4])
+    else
+        awful.tag({ "1" }, s, awful.layout.layouts[4])
+    end
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -200,28 +204,30 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = tasklist_buttons
     }
 
-    -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    if s == screen.primary then
+        -- Create the wibox
+        s.mywibox = awful.wibar({ position = "top", screen = s })
 
-    -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            mylauncher,
-            s.mytaglist,
-            s.mypromptbox,
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            wibox.widget.systray(),
-            mytextclock,
-            battery_widget(),
-            s.mylayoutbox,
-        },
-    }
+        -- Add widgets to the wibox
+        s.mywibox:setup {
+            layout = wibox.layout.align.horizontal,
+            { -- Left widgets
+                layout = wibox.layout.fixed.horizontal,
+                mylauncher,
+                s.mytaglist,
+                s.mypromptbox,
+            },
+            s.mytasklist, -- Middle widget
+            { -- Right widgets
+                layout = wibox.layout.fixed.horizontal,
+                mykeyboardlayout,
+                wibox.widget.systray(),
+                mytextclock,
+                battery_widget(),
+                s.mylayoutbox,
+            },
+        }
+    end
 end)
 -- }}}
 
@@ -231,7 +237,7 @@ beautiful.useless_gap = 3
 --- {{{ Autostart
 awful.spawn.with_shell(
     'which picom >/dev/null 2>&1 && picom --experimental-backend -b;' ..
-    'xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x644 --rotate normal --output HDMI-1 --off --output HDMI-2 --mode 1920x1080 --pos 1920x0 --rotate normal'
+    'xrandr --output eDP-1 --mode 1920x1080 --pos 0x644 --rotate normal --output HDMI-1 --off --output HDMI-2 --primary --mode 1920x1080 --pos 1920x0 --rotate normal'
 )
 --- }}}
 

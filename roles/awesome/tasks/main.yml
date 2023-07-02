@@ -34,6 +34,11 @@
     state: directory
   when: not dir_awesome.stat.exists
 
+- name: Copy themes
+  synchronize:
+    src: files/themes
+    dest: "/home/{{ user }}/.config/awesome/"
+
 - name: Copy default config
   template:
     src: files/rc.lua
