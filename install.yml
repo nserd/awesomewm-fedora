@@ -42,5 +42,6 @@
         - openssl
         - cryptsetup
         - light
+        - arandr
       become: true
       tags: [minimal]
