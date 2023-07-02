@@ -43,5 +43,9 @@
         - cryptsetup
         - light
         - arandr
+        - openconnect
+        - acpi
+        - ImageMagick
+        - ffmpeg
       become: true
       tags: [minimal]

@@ -39,3 +39,8 @@
     src: files/rc.lua
     dest: "{{ awesome_config_dir }}/rc.lua"
   when: not (ansible_check_mode and not dir_awesome.stat.exists)
+
+- name: Add widgets repo
+  ansible.builtin.git:
+    repo: https://github.com/streetturtle/awesome-wm-widgets.git
+    dest: "{{ awesome_config_dir }}/awesome-wm-widgets"
