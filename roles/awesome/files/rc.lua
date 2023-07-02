@@ -230,7 +230,8 @@ beautiful.useless_gap = 3
 
 --- {{{ Autostart
 awful.spawn.with_shell(
-    'which picom >/dev/null 2>&1 && picom --experimental-backend -b'
+    'which picom >/dev/null 2>&1 && picom --experimental-backend -b;' ..
+    'xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x644 --rotate normal --output HDMI-1 --off --output HDMI-2 --mode 1920x1080 --pos 1920x0 --rotate normal'
 )
 --- }}}
 
