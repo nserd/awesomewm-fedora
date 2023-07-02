@@ -42,5 +42,5 @@
 
 - name: Add widgets repo
   ansible.builtin.git:
-    repo: https://github.com/streetturtle/awesome-wm-widgets.git
+    repo: https://github.com/nserd/awesome-wm-widgets.git
     dest: "{{ awesome_config_dir }}/awesome-wm-widgets"
