@@ -41,5 +41,6 @@
         - rclone
         - openssl
         - cryptsetup
+        - light
       become: true
       tags: [minimal]
