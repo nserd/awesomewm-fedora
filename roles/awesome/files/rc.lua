@@ -265,20 +265,20 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
-    awful.key({}, "Print", function () awful.spawn.('flameshot gui') end,
+    awful.key({}, "Print", function () awful.spawn('flameshot gui') end,
               {description = "take a screenshot", group = "screen"}),
 
     -- Brightness and Volume
-    awful.key({}, "XF86MonBrightnessUp", function () awful.spawn.('light -A 5') end,
+    awful.key({}, "XF86MonBrightnessUp", function () awful.spawn('light -A 5') end,
               {description = "up", group = "brightness"}),
-    awful.key({}, "XF86MonBrightnessDown", function () awful.spawn.('light -U 5') end,
+    awful.key({}, "XF86MonBrightnessDown", function () awful.spawn('light -U 5') end,
               {description = "down", group = "brightness"}),
 
-    awful.key({}, "XF86AudioRaiseVolume", function () awful.spawn.('amixer set Master 9%+') end,
+    awful.key({}, "XF86AudioRaiseVolume", function () awful.spawn('amixer set Master 9%+') end,
               {description = "raise", group = "volume"}),
-    awful.key({}, "XF86AudioLowerVolume", function () awful.spawn.('amixer set Master 9%-') end,
+    awful.key({}, "XF86AudioLowerVolume", function () awful.spawn('amixer set Master 9%-') end,
               {description = "lower", group = "volume"}),
-    awful.key({}, "XF86AudioMute", function () awful.spawn.('amixer sset Master toggle') end,
+    awful.key({}, "XF86AudioMute", function () awful.spawn('amixer sset Master toggle') end,
               {description = "mute", group = "volume"}),
 
     -- Layout manipulation
