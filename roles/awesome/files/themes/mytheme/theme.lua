@@ -3,22 +3,22 @@
 --    By Adrian C. (anrxc)   --
 -------------------------------
 
-local themes_path = require("gears.filesystem").get_themes_dir()
+local themes_path = "/home/nserd/.config/awesome/themes/"
 local dpi = require("beautiful.xresources").apply_dpi
 
 -- {{{ Main
 local theme = {}
-theme.wallpaper = themes_path .. "zenburn/zenburn-background.png"
+theme.wallpaper = themes_path .. "mytheme/F34_default_wallpaper_day.jpg"
 -- }}}
 
 -- {{{ Styles
-theme.font      = "sans 8"
+theme.font      = "Cantarell 11"
 
 -- {{{ Colors
 theme.fg_normal  = "#DCDCCC"
 theme.fg_focus   = "#F0DFAF"
 theme.fg_urgent  = "#CC9393"
-theme.bg_normal  = "#3F3F3F"
+theme.bg_normal  = "#000000"
 theme.bg_focus   = "#1E2320"
 theme.bg_urgent  = "#3F3F3F"
 theme.bg_systray = theme.bg_normal

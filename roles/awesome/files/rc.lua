@@ -96,7 +96,8 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+                                    { "open terminal", terminal },
+                                    { "shutdown", terminal .. " -e shutdown now"}
                                   }
                         })
 
@@ -206,7 +207,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     if s == screen.primary then
         -- Create the wibox
-        s.mywibox = awful.wibar({ position = "top", screen = s })
+        s.mywibox = awful.wibar({ position = "top", screen = s , border_width = 3, height = 20, border_color = "#000000" })
 
         -- Add widgets to the wibox
         s.mywibox:setup {
