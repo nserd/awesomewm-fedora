@@ -47,5 +47,6 @@
         - acpi
         - ImageMagick
         - ffmpeg
+        - xclip
       become: true
       tags: [minimal]
