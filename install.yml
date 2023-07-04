@@ -48,5 +48,6 @@
         - ImageMagick
         - ffmpeg
         - xclip
+        - pwgen
       become: true
       tags: [minimal]

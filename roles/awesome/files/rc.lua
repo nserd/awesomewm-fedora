@@ -194,6 +194,10 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
+        layout = {
+            spacing = 2,
+            layout = wibox.layout.fixed.horizontal
+        },
         filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons
     }
@@ -214,6 +218,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.align.horizontal,
             { -- Left widgets
                 layout = wibox.layout.fixed.horizontal,
+                spacing = 10,
                 mylauncher,
                 s.mytaglist,
                 s.mypromptbox,
@@ -375,7 +380,7 @@ clientkeys = gears.table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ "Shift"   }, "c",      function (c) c:kill()                                 end,
+    awful.key({ modkey }, "c",      function (c) c:kill()                                    end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),

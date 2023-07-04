@@ -12,7 +12,7 @@ theme.wallpaper = themes_path .. "mytheme/F34_default_wallpaper_day.jpg"
 -- }}}
 
 -- {{{ Styles
-theme.font      = "Cantarell 11"
+theme.font      = "Cantarell Bold 11"
 
 -- {{{ Colors
 theme.fg_normal  = "#DCDCCC"
