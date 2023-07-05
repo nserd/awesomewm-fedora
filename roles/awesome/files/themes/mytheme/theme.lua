@@ -5,6 +5,8 @@
 
 local themes_path = "/home/nserd/.config/awesome/themes/"
 local dpi = require("beautiful.xresources").apply_dpi
+-- local gears = require("gears")
+-- local cairo = require("lgi").cairo
 
 -- {{{ Main
 local theme = {}
@@ -73,6 +75,8 @@ theme.menu_width  = dpi(100)
 
 -- {{{ Icons
 -- {{{ Taglist
+-- theme.taglist_squares_sel   = gears.surface.load_from_shape(5, 5, gears.shape.rounded_rect, "#FFFFFF")
+-- theme.taglist_squares_unsel = gears.surface.load_from_shape(5, 5, gears.shape.arc, "#FFFFFF")
 theme.taglist_squares_sel   = themes_path .. "zenburn/taglist/squarefz.png"
 theme.taglist_squares_unsel = themes_path .. "zenburn/taglist/squarez.png"
 --theme.taglist_squares_resize = "false"

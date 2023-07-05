@@ -176,7 +176,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
     if s == screen.primary then
-        awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[4])
+        awful.tag({ " 1 ", " 2 ", " 3 ", " 4 ", " 5 "}, s, awful.layout.layouts[4])
     else
         awful.tag({ "1" }, s, awful.layout.layouts[4])
     end
@@ -195,7 +195,6 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         layout = {
-            spacing = 2,
             layout = wibox.layout.fixed.horizontal
         },
         filter  = awful.widget.taglist.filter.all,
