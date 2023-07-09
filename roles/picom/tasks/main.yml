@@ -18,7 +18,14 @@
       - uthash-devel
       - xcb-util-image-devel
       - xcb-util-renderutil-devel
+      - xcb-util-cursor-devel
+      - xcb-util-devel
+      - xcb-util-keysyms-devel
+      - xcb-util-wm-devel
+      - xcb-util-xrm-devel
       - xorg-x11-proto-devel
+      - mesa-libEGL-devel
+      - pcre2-devel
     state: present
   become: true
 
