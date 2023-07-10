@@ -8,7 +8,7 @@
     fg2:    #D8DEE9;
     fg3:    #4C566A;
 
-    font:   "Roboto 12";
+    font:   "Cantarell 11";
 
     background-color:   transparent;
     text-color:         @fg0;
