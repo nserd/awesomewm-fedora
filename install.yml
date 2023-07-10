@@ -23,6 +23,9 @@
     - role: vscode
       tags: [vscode]
 
+    - role: rofi
+      tags: [rofi]
+
   tasks:
     - name: Install additional packages
       dnf:
