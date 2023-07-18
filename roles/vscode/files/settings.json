@@ -7,5 +7,6 @@
             "titleBar.activeForeground":"#ffffff"
         }
     },
-    "window.titleBarStyle": "custom"
+    "window.titleBarStyle": "custom",
+    "workbench.editor.enablePreview": false
 }
