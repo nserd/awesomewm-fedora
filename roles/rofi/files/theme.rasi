@@ -8,7 +8,7 @@
     fg2:    #D8DEE9;
     fg3:    #4C566A;
 
-    font:   "Cantarell 11";
+    font:   "Cantarell 12";
 
     background-color:   transparent;
     text-color:         @fg0;
