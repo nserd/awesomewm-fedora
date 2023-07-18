@@ -55,8 +55,13 @@ beautiful.init("/home/{{ user }}/.config/awesome/themes/{{ awesome_theme | defau
 terminal = "{{ terminal | default ('xterm') }}"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
-
 {% raw %}
+--- {{{ Autostart
+awful.spawn.with_shell(
+    'which picom >/dev/null 2>&1 && picom -b;'
+)
+--- }}}
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -238,13 +243,6 @@ end)
 
 --- Space between windows
 beautiful.useless_gap = 3
-
---- {{{ Autostart
-awful.spawn.with_shell(
-    'which picom >/dev/null 2>&1 && picom --experimental-backend -b;' ..
-    'xrandr --output eDP-1 --mode 1920x1080 --pos 0x644 --rotate normal --output HDMI-1 --off --output HDMI-2 --primary --mode 1920x1080 --pos 1920x0 --rotate normal'
-)
---- }}}
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
