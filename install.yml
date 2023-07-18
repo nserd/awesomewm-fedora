@@ -39,7 +39,6 @@
         - flameshot
         - tar
         - tree
-        - chromium
         - keepassxc
         - rclone
         - openssl
