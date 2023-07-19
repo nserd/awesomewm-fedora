@@ -18,7 +18,8 @@ theme.font      = "Cantarell Bold 11"
 
 -- {{{ Colors
 theme.fg_normal  = "#DCDCCC"
-theme.fg_focus   = "#F0DFAF"
+-- theme.fg_focus   = "#F0DFAF"
+theme.fg_focus   = "#FFFAEB"
 theme.fg_urgent  = "#CC9393"
 theme.bg_normal  = "#000000"
 theme.bg_focus   = "#1E2320"
@@ -27,7 +28,7 @@ theme.bg_systray = theme.bg_normal
 -- }}}
 
 -- {{{ Borders
-theme.useless_gap   = dpi(0)
+-- theme.useless_gap   = dpi(0)
 theme.border_width  = dpi(0)
 theme.border_normal = "#3F3F3F"
 theme.border_focus  = "#6F6F6F"
@@ -77,9 +78,9 @@ theme.menu_width  = dpi(100)
 -- {{{ Taglist
 -- theme.taglist_squares_sel   = gears.surface.load_from_shape(5, 5, gears.shape.rounded_rect, "#FFFFFF")
 -- theme.taglist_squares_unsel = gears.surface.load_from_shape(5, 5, gears.shape.arc, "#FFFFFF")
-theme.taglist_squares_sel   = themes_path .. "zenburn/taglist/squarefz.png"
-theme.taglist_squares_unsel = themes_path .. "zenburn/taglist/squarez.png"
---theme.taglist_squares_resize = "false"
+-- theme.taglist_squares_sel   = themes_path .. "zenburn/taglist/squarefz.png"
+-- theme.taglist_squares_unsel = themes_path .. "zenburn/taglist/squarez.png"
+-- theme.taglist_squares_resize = "false"
 -- }}}
 
 -- {{{ Misc

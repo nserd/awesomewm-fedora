@@ -181,9 +181,9 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
     if s == screen.primary then
-        awful.tag({ " 1 ", " 2 ", " 3 ", " 4 ", " 5 "}, s, awful.layout.layouts[4])
+        awful.tag({ " • ", " • ", " • ", " • ", " • "}, s, awful.layout.layouts[4])
     else
-        awful.tag({ "1" }, s, awful.layout.layouts[4])
+        awful.tag({ " 1 " }, s, awful.layout.layouts[4])
     end
 
     -- Create a promptbox for each screen
@@ -196,11 +196,24 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+
+    function rounded_rect (cr, width, height)
+        gears.shape.rounded_rect (cr, width, height, 5)
+    end
+
+    -- https://www.reddit.com/r/awesomewm/comments/b7mgtv/continuation_on_antialiasing_in_awesome/
+    function rounded_bar(cr, width, height)
+        gears.shape.rounded_bar(cr, width, height)
+    end
+
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         layout = {
             layout = wibox.layout.fixed.horizontal
+        },
+        style   = {
+            shape = rounded_rect
         },
         filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons
@@ -210,24 +223,27 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
+        style   = {
+            shape = rounded_rect
+        },
         buttons = tasklist_buttons
     }
 
     if s == screen.primary then
         -- Create the wibox
 
-        -- https://www.reddit.com/r/awesomewm/comments/b7mgtv/continuation_on_antialiasing_in_awesome/
-        function custom_shape(cr, width, height)
-            gears.shape.rounded_bar(cr, width, height)
-        end
-
         s.mywibox = awful.wibar({ 
             position = "top", 
-            screen = s, 
-            border_width = 5,
+            -- stretch  = false,
+            screen = s,
             height = 30,
+            -- width = 500,
+            -- align = "left",
+            -- border_width = 10,
             -- border_color = "#0000000",
-            shape = custom_shape
+            -- shape = rounded_bar,
+            -- opacity = 1
+            -- type = normal
         })
 
         -- Add widgets to the wibox
@@ -263,7 +279,7 @@ end)
 -- }}}
 
 --- Space between windows
-beautiful.useless_gap = 3
+beautiful.useless_gap = 5
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
