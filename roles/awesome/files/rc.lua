@@ -215,27 +215,48 @@ awful.screen.connect_for_each_screen(function(s)
 
     if s == screen.primary then
         -- Create the wibox
-        s.mywibox = awful.wibar({ position = "top", screen = s , border_width = 3, height = 20, border_color = "#000000" })
+
+        -- https://www.reddit.com/r/awesomewm/comments/b7mgtv/continuation_on_antialiasing_in_awesome/
+        function custom_shape(cr, width, height)
+            gears.shape.rounded_bar(cr, width, height)
+        end
+
+        s.mywibox = awful.wibar({ 
+            position = "top", 
+            screen = s, 
+            border_width = 5,
+            height = 30,
+            -- border_color = "#0000000",
+            shape = custom_shape
+        })
 
         -- Add widgets to the wibox
         s.mywibox:setup {
-            layout = wibox.layout.align.horizontal,
-            { -- Left widgets
-                layout = wibox.layout.fixed.horizontal,
-                spacing = 10,
-                mylauncher,
-                s.mytaglist,
-                s.mypromptbox,
+            {
+                layout = wibox.layout.align.horizontal,
+                { -- Left widgets
+                    layout = wibox.layout.fixed.horizontal,
+                    spacing = 10,
+                    mylauncher,
+                    s.mytaglist,
+                    s.mypromptbox,
+                },
+                s.mytasklist, -- Middle widget
+                { -- Right widgets
+                    layout = wibox.layout.fixed.horizontal,
+                    mykeyboardlayout,
+                    wibox.widget.systray(),
+                    s.mylayoutbox,
+                    mytextclock,
+                    battery_widget(),
+                },
             },
-            s.mytasklist, -- Middle widget
-            { -- Right widgets
-                layout = wibox.layout.fixed.horizontal,
-                mykeyboardlayout,
-                wibox.widget.systray(),
-                s.mylayoutbox,
-                mytextclock,
-                battery_widget(),
-            },
+            top = 5,
+            left = 8,
+            right = 8,
+            bottom = 5,
+            -- color = "#0000000",
+            widget = wibox.container.margin
         }
     end
 end)
