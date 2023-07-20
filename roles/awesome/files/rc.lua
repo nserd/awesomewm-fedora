@@ -58,7 +58,7 @@ editor_cmd = terminal .. " -e " .. editor
 {% raw %}
 --- {{{ Autostart
 awful.spawn.with_shell(
-    'which picom >/dev/null 2>&1 && picom -b;'
+    'which picom >/dev/null 2>&1 && [ $(ps x | grep picom | grep -v grep | wc -l) == 0 ] && picom -b;'
 )
 --- }}}
 
