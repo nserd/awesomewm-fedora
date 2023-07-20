@@ -80,6 +80,8 @@ theme.menu_width  = dpi(100)
 -- theme.taglist_squares_unsel = gears.surface.load_from_shape(5, 5, gears.shape.arc, "#FFFFFF")
 -- theme.taglist_squares_sel   = themes_path .. "zenburn/taglist/squarefz.png"
 -- theme.taglist_squares_unsel = themes_path .. "zenburn/taglist/squarez.png"
+theme.taglist_squares_sel   = themes_path .. "mytheme/fill_dot_20pxl.png"
+theme.taglist_squares_unsel = themes_path .. "mytheme/empty_dot_20pxl.png"
 -- theme.taglist_squares_resize = "false"
 -- }}}
 

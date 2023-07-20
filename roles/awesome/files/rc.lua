@@ -181,7 +181,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Each screen has its own tag table.
     if s == screen.primary then
-        awful.tag({ " • ", " • ", " • ", " • ", " • "}, s, awful.layout.layouts[4])
+        awful.tag({ "    ", "    ", "    ", "    ", "    "}, s, awful.layout.layouts[4])
     else
         awful.tag({ " 1 " }, s, awful.layout.layouts[4])
     end
