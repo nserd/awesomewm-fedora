@@ -46,3 +46,23 @@
     name: "Keychrone fix"
     job: "echo 0 > /sys/module/hid_apple/parameters/fnmode"
   become: true
+
+- name: Setup monitor hotplug
+  block:
+    - name: Ensure {{ monitor_layout_script_dir }} dir exist
+      file:
+        path: "{{ monitor_layout_script_dir }}"
+        state: directory
+
+    - name: Copy layout script
+      template:
+        src: files/default_layout.sh
+        dest: "{{ monitor_layout_script_dir }}/"
+
+    - name: Copy udev rule
+      template:
+        src: files/98-monitor-hotplug.rules
+        dest: /etc/udev/rules.d/
+      become: true
+      notify: reload udev
+  tags: [monitor-hotplug]

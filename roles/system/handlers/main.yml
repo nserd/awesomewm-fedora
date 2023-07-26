@@ -1,0 +1,4 @@
+---
+- name: reload udev
+  command: udevadm control --reload-rules
+  become: true

@@ -1,0 +1,1 @@
+KERNEL=="card1", SUBSYSTEM=="drm", ACTION=="change", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/{{ user }}/.Xauthority", RUN+="/bin/bash {{ monitor_layout_script_dir }}/default_layout.sh"
