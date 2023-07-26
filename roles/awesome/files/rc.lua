@@ -346,7 +346,7 @@ globalkeys = gears.table.join(
     awful.key({}, "Print", function () awful.spawn('flameshot gui') end,
               {description = "take a screenshot", group = "screen"}),
 
-    awful.key({modkey,            }, "l", function () awful.spawn('betterlockscreen -l') end,
+    awful.key({modkey,            }, "l", function () awful.spawn('betterlockscreen -l blur') end,
               {description = "lock screen", group = "screen"}),
 
     -- Brightness and Volume
