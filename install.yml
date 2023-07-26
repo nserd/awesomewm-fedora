@@ -26,6 +26,9 @@
     - role: rofi
       tags: [rofi]
 
+    - role: betterlockscreen
+      tags: [betterlockscreen]
+
   tasks:
     - name: Install additional packages
       dnf:
