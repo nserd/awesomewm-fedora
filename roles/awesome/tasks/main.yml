@@ -35,7 +35,7 @@
     src: files/themes
     dest: "{{ awesome_config_dir }}/"
 
-- name: Copy default config
+- name: Copy config
   template:
     src: files/rc.lua
     dest: "{{ awesome_config_dir }}/rc.lua"

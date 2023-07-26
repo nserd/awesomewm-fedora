@@ -53,13 +53,17 @@ beautiful.init("/home/{{ user }}/.config/awesome/themes/{{ awesome_theme | defau
 
 -- This is used later as the default terminal and editor to run.
 terminal = "{{ terminal | default ('xterm') }}"
+{% raw %}
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
-{% raw %}
+
 --- {{{ Autostart
+{% endraw %}
 awful.spawn.with_shell(
-    'which picom >/dev/null 2>&1 && [ $(pgrep -x picom | wc -l) == 0 ] && picom -b;'
+    'which picom >/dev/null 2>&1 && [ $(pgrep -x picom | wc -l) == 0 ] && picom -b;' ..
+    'setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"'
 )
+{% raw %}
 --- }}}
 
 -- Default modkey.
@@ -289,16 +293,40 @@ root.buttons(gears.table.join(
 ))
 -- }}}
 
+local function create_tag()
+    print("CREATE_TAG")
+    print(tag.instances ())
+    awful.tag.add("    ", {
+        screen = awful.client.focus.screen,
+        volatile = true,
+    })
+end
+
+local function next_tag()
+    -- TODO: get current viewed tag id.
+    local screen = awful.screen.focused()
+    print(screen.selected_tag)
+    awful.tag.viewnext(screen)
+end
+
+local function prev_tag()
+    local screen = awful.screen.focused()
+    print(screen.selected_tag)
+    awful.tag.viewprev(screen)
+end
+
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
+    awful.key({ modkey,           }, "Left",   prev_tag,
               {description = "view previous", group = "tag"}),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
+    awful.key({ modkey,           }, "Right",  next_tag,
               {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
+    awful.key({ modkey,           }, "Up", create_tag,
+              {description = "create tag", group = "tag"}),
 
     awful.key({ modkey,           }, "j",
         function ()
