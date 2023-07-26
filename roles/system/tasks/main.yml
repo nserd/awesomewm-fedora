@@ -54,6 +54,7 @@
       template:
         src: files/default_layout.sh
         dest: "{{ monitor_layout_script_dir }}/"
+        mode: '744'
 
     - name: Copy udev rule
       template:
