@@ -12,15 +12,11 @@
         src: files/.bashrc
         dest: "/home/{{ user }}/.bashrc"
 
-    - stat: path="{{ bashrc_dir }}"
-      register: dir_bashrc
-
-    - name: Create dir - {{ bashrc_dir }}
+    - name: Ensure {{ bashrc_dir }} dir exist
       file:
         path: "{{ bashrc_dir }}"
         state: directory
-      when: not dir_bashrc.stat.exists
-    
+
     - name: Copy aliases
       template:
         src: files/.bashrc.d/bash_aliases

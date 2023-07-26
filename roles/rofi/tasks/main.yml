@@ -5,14 +5,10 @@
     state: present
   become: true
 
-- stat: path="{{ rofi_config_dir }}"
-  register: dir_rofi
-
-- name: Create dir - {{ rofi_config_dir }}
+- name: Ensure {{ rofi_config_dir }} dir exist
   file:
     path: "{{ rofi_config_dir }}"
     state: directory
-  when: not dir_rofi.stat.exists
 
 - name: Add config
   copy:
@@ -21,4 +17,3 @@
   loop:
     - config.rasi
     - theme.rasi
-  when: not (ansible_check_mode and not dir_kitty.stat.exists)
