@@ -19,14 +19,10 @@
     state: present
   become: true
 
-- stat: path="{{ vscode_user_config_dir }}"
-  register: dir_vscode_user
-
-- name: Create dir - {{ vscode_user_config_dir }}
+- name: Ensure {{ vscode_user_config_dir }} dir exist
   file:
     path: "{{ vscode_user_config_dir }}"
     state: directory
-  when: not dir_vscode_user.stat.exists
 
 - name: Copy config
   template:
