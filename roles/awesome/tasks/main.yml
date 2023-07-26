@@ -25,25 +25,20 @@
     state: present
   become: true
 
-- stat: path="{{ awesome_config_dir }}"
-  register: dir_awesome
-
-- name: Create dir - {{ awesome_config_dir }}
+- name: Ensure {{ awesome_config_dir }} dir exist
   file:
     path: "{{ awesome_config_dir }}"
     state: directory
-  when: not dir_awesome.stat.exists
 
 - name: Copy themes
   synchronize:
     src: files/themes
-    dest: "/home/{{ user }}/.config/awesome/"
+    dest: "{{ awesome_config_dir }}/"
 
 - name: Copy default config
   template:
     src: files/rc.lua
     dest: "{{ awesome_config_dir }}/rc.lua"
-  when: not (ansible_check_mode and not dir_awesome.stat.exists)
 
 - name: Add widgets repo
   ansible.builtin.git:

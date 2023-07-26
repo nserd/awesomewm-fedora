@@ -5,17 +5,12 @@
     state: present
   become: true
 
-- stat: path="{{ kitty_config_dir }}"
-  register: dir_kitty
-
-- name: Create dir - {{ kitty_config_dir }}
+- name: Ensure {{ kitty_config_dir }} dir exist
   file:
     path: "{{ kitty_config_dir }}"
     state: directory
-  when: not dir_kitty.stat.exists
 
 - name: Add config
   copy:
     src: files/kitty.conf
     dest: "{{ kitty_config_dir }}/kitty.conf"
-  when: not (ansible_check_mode and not dir_kitty.stat.exists)
