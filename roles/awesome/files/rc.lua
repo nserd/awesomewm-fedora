@@ -667,7 +667,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 {% endraw %}
 awful.spawn.with_shell(
     'which picom &>/dev/null && [ $(pgrep -x picom | wc -l) == 0 ] && picom -b;' ..
-    'loginctl lock-session;' ..
+    '[ $(pgrep -x i3lock | wc -l) != 0 ] && pkill -9 i3lock && loginctl lock-session;' .. -- Fix a problem with showing windows on top of locker. TODO: find better solution
     'setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"'
 )
 {%- raw %}
