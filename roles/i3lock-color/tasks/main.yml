@@ -1,0 +1,40 @@
+---
+- name: Install dependencies
+  dnf:
+    name: 
+      - xset
+      - autoconf
+      - automake
+      - cairo-devel
+      - fontconfig
+      - gcc
+      - libev-devel
+      - libjpeg-turbo-devel
+      - libXinerama
+      - libxkbcommon-devel
+      - libxkbcommon-x11-devel
+      - libXrandr
+      - pam-devel
+      - pkgconf
+      - xcb-util-image-devel
+      - xcb-util-xrm-devel
+    state: present
+  become: true
+
+- name: Clone a repo - https://github.com/Raymo111/i3lock-color
+  ansible.builtin.git:
+    repo: https://github.com/Raymo111/i3lock-color
+    dest: /tmp/i3lock-color
+
+- name: Build and Install
+  command: ./install-i3lock-color.sh
+  args:
+    chdir: /tmp/i3lock-color
+    creates: /usr/bin/i3lock
+
+- name: Copy lock script
+  template:
+    src: files/i3lock-configured
+    dest: "/usr/bin/i3lock-configured"
+    mode: '755'
+  become: true

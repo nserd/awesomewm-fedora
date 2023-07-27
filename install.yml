@@ -26,8 +26,8 @@
     - role: rofi
       tags: [rofi]
 
-    - role: betterlockscreen
-      tags: [betterlockscreen]
+    - role: i3lock-color
+      tags: [i3lock-color]
 
   tasks:
     - name: Install additional packages

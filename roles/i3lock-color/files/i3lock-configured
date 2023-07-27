@@ -1,0 +1,49 @@
+#!/bin/bash
+
+T_BLACK='#00000020'
+BLANK='#00000000'
+TT_WHITE='#ffffff32'
+T_WHITE='#ffffff50'
+WHITE='#ffffffff'
+BLUE='#4d9bd050'
+RED='#c7484850'
+LIGHT_RED='#cd5c5cff'
+
+FONT='Cantarell'
+
+i3lock \
+--insidever-color=$T_BLACK     \
+--ringver-color=$BLUE          \
+\
+--insidewrong-color=$T_BLACK   \
+--ringwrong-color=$RED         \
+\
+--inside-color=$T_BLACK        \
+--ring-color=$TT_WHITE         \
+--line-color=$BLANK            \
+--separator-color=$BLANK       \
+\
+--verif-color=$WHITE           \
+--wrong-color=$LIGHT_RED       \
+--time-color=$WHITE            \
+--date-color=$WHITE            \
+--layout-color=$WHITE          \
+--keyhl-color=$BLUE            \
+--bshl-color=$T_WHITE          \
+\
+--screen 1                     \
+--blur 8                       \
+--clock                        \
+--indicator                    \
+--time-str="%H:%M:%S"          \
+--date-str="%A, %d %B"         \
+--keylayout 1                  \
+\
+--wrong-text="wrong"           \
+--verif-text="verifying"       \
+\
+--date-font=$FONT              \
+--time-font=$FONT              \
+--wrong-font=$FONT             \
+--verif-font=$FONT             \
+--layout-font=$FONT

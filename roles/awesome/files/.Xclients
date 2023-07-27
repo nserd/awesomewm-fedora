@@ -1,7 +1,7 @@
 # Lock screen after {{ screen_saver_timeout }} seconds of inactivity
 xset s on
 xset s {{ screen_saver_timeout }}
-xss-lock -- i3lock &
+xss-lock -- i3lock-configured &
 
 # Keyboard layout
 setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"
