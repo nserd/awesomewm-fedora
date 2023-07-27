@@ -1,3 +1,13 @@
+# Lock screen after {{ screen_saver_timeout }} seconds of inactivity
+xset s on
+xset s {{ screen_saver_timeout }}
+xss-lock -- i3lock &
+
+# Keyboard layout
 setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"
+
+# Monitor layout
 /bin/bash /home/{{ user }}/.screenlayout/default_layout.sh # TODO: вынести X в отдельный плейбук и добавлять строки на основе ansible_run_tags
+
+# Run AwesomeWM
 exec awesome >> /tmp/awesome.log 2>> /tmp/awesome.error.log

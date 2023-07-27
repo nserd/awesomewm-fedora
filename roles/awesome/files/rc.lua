@@ -57,15 +57,6 @@ terminal = "{{ terminal | default ('xterm') }}"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
---- {{{ Autostart
-{% endraw %}
-awful.spawn.with_shell(
-    'which picom >/dev/null 2>&1 && [ $(pgrep -x picom | wc -l) == 0 ] && picom -b;' ..
-    'setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"'
-)
-{% raw %}
---- }}}
-
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -343,10 +334,10 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
+    -- Screen
     awful.key({}, "Print", function () awful.spawn('flameshot gui') end,
               {description = "take a screenshot", group = "screen"}),
-
-    awful.key({modkey,            }, "l", function () awful.spawn('betterlockscreen -l blur') end,
+    awful.key({modkey,            }, "l", function () awful.spawn('loginctl lock-session') end,
               {description = "lock screen", group = "screen"}),
 
     -- Brightness and Volume
@@ -671,4 +662,14 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+--- {{{ Autostart
+{% endraw %}
+awful.spawn.with_shell(
+    'which picom &>/dev/null && [ $(pgrep -x picom | wc -l) == 0 ] && picom -b;' ..
+    'loginctl lock-session;' ..
+    'setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"'
+)
+{%- raw %}
+--- }}}
 {% endraw %}
