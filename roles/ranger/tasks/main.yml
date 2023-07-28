@@ -1,0 +1,28 @@
+---
+- name: Install
+  pip:
+    name: 
+      - pillow
+      - ranger-fm
+
+- name: Download Nerd patch for Source Code Pro
+  unarchive:
+    src: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_font_patch_version }}/SourceCodePro.zip"
+    dest: /usr/share/fonts/source-code-pro-nerd
+    remote_src: yes
+  become: true
+
+- name: Ensure {{ ranger_config_dir }} dir exist
+  file:
+    path: "{{ ranger_config_dir }}"
+    state: directory
+
+- name: Download plugin
+  git:
+    repo: "https://github.com/alexanderjeurissen/ranger_devicons"
+    dest: "{{ ranger_config_dir }}/plugins/ranger_devicons"
+
+- name: Copy config
+  template:
+    src: files/rc.conf
+    dest: "{{ ranger_config_dir }}/"

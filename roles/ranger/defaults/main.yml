@@ -1,0 +1,2 @@
+nerd_font_patch_version: "v3.0.2"
+ranger_config_dir: "/home/{{ user }}/.config/ranger"

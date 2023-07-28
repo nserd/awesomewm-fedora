@@ -29,6 +29,9 @@
     - role: i3lock-color
       tags: [i3lock-color]
 
+    - role: ranger
+      tags: [ranger]
+
   tasks:
     - name: Install additional packages
       dnf:
