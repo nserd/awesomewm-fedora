@@ -86,5 +86,5 @@
       when: not ansible_check_mode
 
     - name: Update font cache
-      command: "fc-cache -fv {{ fonts_dir }}"
+      command: "fc-cache -fv {{ fonts_dir }}" # fc-list
   tags: [fonts]
