@@ -1,2 +1,3 @@
 bashrc_dir: "/home/{{ user }}/.bashrc.d"
 monitor_layout_script_dir: "/home/{{ user }}/.screenlayout"
+fonts_dir: "/home/{{ user }}/.local/share/fonts"

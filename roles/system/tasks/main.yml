@@ -63,3 +63,28 @@
       become: true
       notify: reload udev
   tags: [monitor-hotplug]
+
+- name: Install fonts
+  block:
+    - name: Ensure {{ fonts_dir }} dir exist
+      file:
+        path: "{{ fonts_dir }}"
+        state: directory
+
+    - name: Ensure font dirs exist
+      file:
+        path: "{{ fonts_dir }}/{{ item }}"
+        state: directory
+      loop:
+        - JetBrainsMono
+
+    - name: Download JetbrainsMono Font
+      unarchive:
+        src: "https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip"
+        dest: "{{ fonts_dir }}/JetBrainsMono"
+        remote_src: yes
+      when: not ansible_check_mode
+
+    - name: Update font cache
+      command: "fc-cache -fv {{ fonts_dir }}"
+  tags: [fonts]
