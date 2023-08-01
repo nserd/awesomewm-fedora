@@ -102,7 +102,7 @@ quitmenu = {
     { "reboot", "reboot" }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu },
                                     { "terminal", terminal },
                                     { "menu", appmenu },
                                     { "quit", quitmenu }
