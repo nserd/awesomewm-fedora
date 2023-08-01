@@ -57,6 +57,8 @@ terminal = "{{ terminal | default ('xterm') }}"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
+appmenu = "rofi -show drun -show-icons"
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -95,9 +97,15 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end },
 }
 
+quitmenu = {
+    { "shutdown", "shutdown now" },
+    { "reboot", "reboot" }
+}
+
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal },
-                                    { "shutdown", terminal .. " -e shutdown now"}
+                                    { "terminal", terminal },
+                                    { "menu", appmenu },
+                                    { "quit", quitmenu }
                                   }
                         })
 
@@ -425,7 +433,7 @@ globalkeys = gears.table.join(
               end,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey }, "p", function() awful.spawn('rofi -show drun -show-icons') end,
+    awful.key({ modkey }, "p", function() awful.spawn(appmenu) end,
               {description = "show the menubar", group = "launcher"})
 )
 
