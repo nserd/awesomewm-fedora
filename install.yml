@@ -57,5 +57,6 @@
         - ffmpeg
         - xclip
         - pwgen
+        - vlc
       become: true
       tags: [minimal]
