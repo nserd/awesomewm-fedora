@@ -334,6 +334,11 @@ local function next_tag()
             if s.selected_tag.index < #s.tags then
                 awful.tag.viewnext(s)
             end
+
+            if clients_numb == 0 and #s.tags > 1 then
+                current_tag:delete()
+                save_tags_numb(#s.tags)
+            end
         end
     end)
 end
@@ -350,7 +355,6 @@ local function prev_tag()
             end
 
             if clients_numb == 0 and #s.tags > 1 then
-                -- print("DELETE_TAG")
                 current_tag:delete()
                 save_tags_numb(#s.tags)
             end
