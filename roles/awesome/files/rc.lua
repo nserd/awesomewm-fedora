@@ -318,6 +318,13 @@ end)
 --- Space between windows
 beautiful.useless_gap = 5
 
+local function create_tag(s)
+    local new_tag = awful.tag.add("    ", { screen = s, volatile = true, layout = default_tag_layout })
+    save_tags_numb(#s.tags)
+
+    return new_tag
+end
+
 local function next_tag()
     awful.screen.connect_for_each_screen(function(s)
         if s == screen.primary then
@@ -326,9 +333,7 @@ local function next_tag()
 
             -- print("next_tag(): current_tag_index = " ..  current_tag.index .. ", numb of all tags = " .. #s.tags .. ", current_tag clinets = " .. clients_numb)
             if current_tag.index == #s.tags and clients_numb > 0 then
-                -- print("CREATE_TAG")
-                awful.tag.add("    ", { screen = s, volatile = true, layout = default_tag_layout })
-                save_tags_numb(#s.tags)
+                create_tag(s)
             end
 
             if s.selected_tag.index < #s.tags then
@@ -613,6 +618,8 @@ for i = 1, 9 do
                           local tag = client.focus.screen.tags[i]
                           if tag then
                               client.focus:move_to_tag(tag)
+                          else
+                            client.focus:move_to_tag(create_tag(client.focus.screen))
                           end
                      end
                   end,
