@@ -618,8 +618,8 @@ for i = 1, 9 do
                           local tag = client.focus.screen.tags[i]
                           if tag then
                               client.focus:move_to_tag(tag)
-                          else
-                            client.focus:move_to_tag(create_tag(client.focus.screen))
+                          elseif client.focus.screen == screen.primary then
+                              client.focus:move_to_tag(create_tag(client.focus.screen))
                           end
                      end
                   end,
