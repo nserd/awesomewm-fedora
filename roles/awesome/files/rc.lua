@@ -85,6 +85,8 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
 }
+
+local default_tag_layout = awful.layout.layouts[4]
 -- }}}
 
 -- {{{ Menu
@@ -178,15 +180,47 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+-- {{{ Functions for save tags if awesome restarted
+local tmp_tags_file = "/tmp/tags.awesome"
+
+local function save_tags_numb(n)
+    local file = io.open(tmp_tags_file, "w")
+
+    io.output(file)
+    io.write(n)
+    io.close(file)
+end
+
+local function load_tags_numb()
+    local file = io.open(tmp_tags_file, "r")
+
+    if file ~= nil
+    then
+        io.input(file)
+        local n = io.read()
+        io.close(file)
+        return n
+    else
+        return 0
+    end
+end
+-- }}
+
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
+    local tags_numb = tonumber(load_tags_numb())
     -- Each screen has its own tag table.
-    if s == screen.primary then
-        awful.tag({ "    ", "    ", "    ", "    ", "    "}, s, awful.layout.layouts[4])
+    if s == screen.primary and tags_numb > 0 then
+        local tags = {}
+        for i = 1, tags_numb do
+            table.insert(tags, "   ")
+        end
+
+        awful.tag(tags, s, default_tag_layout)
     else
-        awful.tag({ " 1 " }, s, awful.layout.layouts[4])
+        awful.tag({ "    " }, s, default_tag_layout)
     end
 
     -- Create a promptbox for each screen
@@ -292,26 +326,38 @@ root.buttons(gears.table.join(
 ))
 -- }}}
 
-local function create_tag()
-    print("CREATE_TAG")
-    print(tag.instances ())
-    awful.tag.add("    ", {
-        screen = awful.client.focus.screen,
-        volatile = true,
-    })
-end
-
 local function next_tag()
-    -- TODO: get current viewed tag id.
-    local screen = awful.screen.focused()
-    print(screen.selected_tag)
-    awful.tag.viewnext(screen)
+    awful.screen.connect_for_each_screen(function(s)
+        if s == screen.primary then
+            local current_tag = s.selected_tag
+            local clients_numb = #current_tag:clients()
+
+            -- print("next_tag(): current_tag_index = " ..  current_tag.index .. ", numb of all tags = " .. #s.tags .. ", current_tag clinets = " .. clients_numb)
+            if current_tag.index == #s.tags and clients_numb > 0 then
+                print("CREATE_TAG")
+                awful.tag.add("    ", { screen = s, volatile = true, layout = default_tag_layout })
+                save_tags_numb(#s.tags)
+            end
+            awful.tag.viewnext(s)
+        end
+    end)
 end
 
 local function prev_tag()
-    local screen = awful.screen.focused()
-    print(screen.selected_tag)
-    awful.tag.viewprev(screen)
+    awful.screen.connect_for_each_screen(function(s)
+        if s == screen.primary then
+            local current_tag = s.selected_tag
+            local clients_numb = #current_tag:clients()
+
+            -- print("prev_tag(): current_tag_index = " ..  current_tag.index .. ", numb of all tags = " .. #s.tags .. ", current_tag clinets = " .. clients_numb)
+            awful.tag.viewprev(s)
+            if clients_numb == 0 and #s.tags > 1 then
+                print("DELETE_TAG")
+                current_tag:delete()
+                save_tags_numb(#s.tags)
+            end
+        end
+    end)
 end
 
 -- {{{ Key bindings
@@ -324,8 +370,6 @@ globalkeys = gears.table.join(
               {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
-    awful.key({ modkey,           }, "Up", create_tag,
-              {description = "create tag", group = "tag"}),
 
     awful.key({ modkey,           }, "j",
         function ()
