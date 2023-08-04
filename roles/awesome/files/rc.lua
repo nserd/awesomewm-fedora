@@ -86,7 +86,7 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.se,
 }
 
-local default_tag_layout = awful.layout.layouts[4]
+local default_tag_layout = awful.layout.layouts[5]
 -- }}}
 
 -- {{{ Menu
@@ -318,14 +318,6 @@ end)
 --- Space between windows
 beautiful.useless_gap = 5
 
--- {{{ Mouse bindings
-root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
--- }}}
-
 local function next_tag()
     awful.screen.connect_for_each_screen(function(s)
         if s == screen.primary then
@@ -334,11 +326,14 @@ local function next_tag()
 
             -- print("next_tag(): current_tag_index = " ..  current_tag.index .. ", numb of all tags = " .. #s.tags .. ", current_tag clinets = " .. clients_numb)
             if current_tag.index == #s.tags and clients_numb > 0 then
-                print("CREATE_TAG")
+                -- print("CREATE_TAG")
                 awful.tag.add("    ", { screen = s, volatile = true, layout = default_tag_layout })
                 save_tags_numb(#s.tags)
             end
-            awful.tag.viewnext(s)
+
+            if s.selected_tag.index < #s.tags then
+                awful.tag.viewnext(s)
+            end
         end
     end)
 end
@@ -350,15 +345,26 @@ local function prev_tag()
             local clients_numb = #current_tag:clients()
 
             -- print("prev_tag(): current_tag_index = " ..  current_tag.index .. ", numb of all tags = " .. #s.tags .. ", current_tag clinets = " .. clients_numb)
-            awful.tag.viewprev(s)
+            if current_tag.index > 1 then
+                awful.tag.viewprev(s)
+            end
+
             if clients_numb == 0 and #s.tags > 1 then
-                print("DELETE_TAG")
+                -- print("DELETE_TAG")
                 current_tag:delete()
                 save_tags_numb(#s.tags)
             end
         end
     end)
 end
+
+-- {{{ Mouse bindings
+root.buttons(gears.table.join(
+    awful.button({ }, 3, function () mymainmenu:toggle() end),
+    awful.button({ }, 4, next_tag),
+    awful.button({ }, 5, prev_tag)
+))
+-- }}}
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
