@@ -215,7 +215,7 @@ awful.screen.connect_for_each_screen(function(s)
     if s == screen.primary and tags_numb > 0 then
         local tags = {}
         for i = 1, tags_numb do
-            table.insert(tags, "   ")
+            table.insert(tags, "    ")
         end
 
         awful.tag(tags, s, default_tag_layout)
