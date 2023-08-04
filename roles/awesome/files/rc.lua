@@ -206,6 +206,15 @@ local function load_tags_numb()
 end
 -- }}
 
+-- https://www.reddit.com/r/awesomewm/comments/b7mgtv/continuation_on_antialiasing_in_awesome/
+function rounded_rect (cr, width, height)
+    gears.shape.rounded_rect (cr, width, height, 5)
+end
+
+function rounded_bar(cr, width, height)
+    gears.shape.rounded_bar(cr, width, height)
+end
+
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
@@ -233,15 +242,6 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
-
-    function rounded_rect (cr, width, height)
-        gears.shape.rounded_rect (cr, width, height, 5)
-    end
-
-    -- https://www.reddit.com/r/awesomewm/comments/b7mgtv/continuation_on_antialiasing_in_awesome/
-    function rounded_bar(cr, width, height)
-        gears.shape.rounded_bar(cr, width, height)
-    end
 
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
@@ -358,6 +358,50 @@ local function prev_tag()
     end)
 end
 
+local function popup_tasklist()
+    awful.popup {
+        screen = awful.screen.focused(),
+        widget = awful.widget.tasklist {
+            screen   = awful.screen.focused(),
+            filter   = awful.widget.tasklist.filter.currenttags,
+            buttons  = tasklist_buttons,
+            layout   = {
+                spacing = 5,
+                layout = wibox.layout.fixed.vertical
+            },
+            widget_template = {
+                {
+                    {
+                        {
+                            {
+                                id     = "icon_role",
+                                widget = wibox.widget.imagebox,
+                            },
+                            margins = 2,
+                            widget  = wibox.container.margin,
+                        },
+                        {
+                            id     = "text_role",
+                            widget = wibox.widget.textbox,
+                        },
+                        layout = wibox.layout.fixed.horizontal,
+                    },
+                    left  = 10,
+                    right = 10,
+                    widget = wibox.container.margin
+                },
+                forced_width    = 600,
+                forced_height   = 30,
+                id     = "background_role",
+                widget = wibox.container.background,
+            },
+        },
+        hide_on_right_click	= true,
+        ontop        = true,
+        placement    = awful.placement.centered,
+    }
+end
+
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -420,16 +464,18 @@ globalkeys = gears.table.join(
               {description = "focus the next screen", group = "screen"}),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
+    awful.key({ modkey,           }, "Tab", popup_tasklist,
+              {description = "show tasklist", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end,
-        {description = "go back", group = "client"}),
+    -- awful.key({ modkey,           }, "Tab",
+    --     function ()
+    --         awful.client.focus.history.previous()
+    --         if client.focus then
+    --             client.focus:raise()
+    --         end
+    --     end,
+    --     {description = "go back", group = "client"}),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
