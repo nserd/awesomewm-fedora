@@ -106,7 +106,7 @@ quitmenu = {
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu },
                                     { "terminal", terminal },
-                                    { "menu", appmenu },
+                                    { "menu", appmenu .. " -normal-window" },
                                     { "quit", quitmenu }
                                   }
                         })
