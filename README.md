@@ -7,11 +7,14 @@ iwlegacy-firmware
 iwlwifi-dvm-firmware
 iwlwifi-mvm-firmware
 ```
-Install Fedora minimal and run init script:
+Install Fedora mininal, then install the drivers via:
+```
+rpm -i <package>
+```
+Run init script:
 ```
 curl -s https://raw.githubusercontent.com/nserd/awesomewm-fedora/main/init.sh | bash
 ```
-
 ## Run playbook
 ```
 cd awesomewm-fedora
