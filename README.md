@@ -1,19 +1,19 @@
-# For Fedora Server netinst (Basic install without options)
+# For Fedora netinst (minimal install + common NetworkManager Submodules)
 
-Preparation:
+## Preparation
+Download Wi-Fi drivers (https://rpmfind.net/):
 ```
-sudo dnf install -y git && git clone https://github.com/nserd/awesomewm-fedora
-p="get-pip.py" && curl https://bootstrap.pypa.io/$p -o $p && python $p && rm $p
-pip install ansible
+iwlegacy-firmware
+iwlwifi-dvm-firmware
+iwlwifi-mvm-firmware
+```
+Install Fedora minimal and run init script:
+```
+curl -s https://raw.githubusercontent.com/nserd/awesomewm-fedora/main/init.sh | bash
+```
+
+## Run playbook
+```
 cd awesomewm-fedora
-```
->Or run init script:
->```
->curl -s https://raw.githubusercontent.com/nserd/awesomewm-fedora/main/init.sh | bash
->```
-
-
-Run playbook:
-```
 ansible-playbook install.yml -D
 ```
