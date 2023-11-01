@@ -4,6 +4,17 @@
   vars:
     user: "{{ ansible_user_id }}"
 
+  pre_tasks:
+    - name: Install required packages
+      dnf:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - rsync
+        - unzip
+      become: true
+      tags: [minimal]
+
   roles:
     - role: awesome
       tags: [awesome, minimal]
