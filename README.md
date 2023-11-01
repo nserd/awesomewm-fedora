@@ -1,4 +1,4 @@
-# For Fedora Server netinst (minimal install + common NetworkManager Submodules)
+# For Fedora Server netinst (Basic install without options)
 
 Preparation:
 ```
