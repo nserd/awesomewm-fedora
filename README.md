@@ -7,7 +7,7 @@ iwlegacy-firmware
 iwlwifi-dvm-firmware
 iwlwifi-mvm-firmware
 ```
-Install Fedora (mininal + common NetworkManager Submodules), then install the drivers via:
+Install Fedora (netinst: minimal + common NetworkManager Submodules), then install the drivers via:
 ```
 rpm -i <package>
 ```
