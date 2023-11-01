@@ -15,7 +15,7 @@ Run init script:
 ```
 curl -s https://raw.githubusercontent.com/nserd/awesomewm-fedora/main/init.sh | bash
 ```
-## Run playbook
+## Installation
 ```
 cd awesomewm-fedora
 ansible-playbook install.yml -D
