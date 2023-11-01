@@ -58,5 +58,7 @@
         - xclip
         - pwgen
         - vlc
+        - libvdpau-va-gl # mplayer
+        - kernel-tools   # cpupower
       become: true
       tags: [minimal]
