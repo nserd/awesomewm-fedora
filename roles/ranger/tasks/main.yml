@@ -1,14 +1,20 @@
 ---
 - name: Install
   pip:
-    name: 
+    name:
       - pillow
       - ranger-fm
+
+- name: Ensure {{ nerd_font_patch_dir }} dir exist
+  file:
+    path: "{{ nerd_font_patch_dir }}"
+    state: directory
+  become: true
 
 - name: Download Nerd patch for Source Code Pro
   unarchive:
     src: "https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_font_patch_version }}/SourceCodePro.zip"
-    dest: /usr/share/fonts/source-code-pro-nerd
+    dest: "{{ nerd_font_patch_dir }}"
     remote_src: yes
   become: true
 
