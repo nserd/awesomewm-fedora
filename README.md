@@ -1,4 +1,4 @@
-# For Fedora netinst (minimal install + common NetworkManager Submodules)
+# Fedora Awesome WM Setup
 
 ## Preparation
 Download Wi-Fi drivers (https://rpmfind.net/):
@@ -7,7 +7,7 @@ iwlegacy-firmware
 iwlwifi-dvm-firmware
 iwlwifi-mvm-firmware
 ```
-Install Fedora mininal, then install the drivers via:
+Install Fedora (mininal + common NetworkManager Submodules), then install the drivers via:
 ```
 rpm -i <package>
 ```
