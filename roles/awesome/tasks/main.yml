@@ -35,6 +35,12 @@
     src: files/themes
     dest: "{{ awesome_config_dir }}/"
 
+- name: Copy icons
+  synchronize:
+    src: files/themes/mytheme/icons/Adwaita
+    dest: /usr/share/icons/
+  become: true
+
 - name: Copy config
   template:
     src: files/rc.lua

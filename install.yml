@@ -13,6 +13,7 @@
         - rsync
         - unzip
         - alsa-utils
+        - bind-utils
       become: true
       tags: [minimal]
 
