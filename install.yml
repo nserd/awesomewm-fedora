@@ -12,6 +12,7 @@
       loop:
         - rsync
         - unzip
+        - alsa-utils
       become: true
       tags: [minimal]
 
