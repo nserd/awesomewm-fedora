@@ -73,5 +73,6 @@
         - vlc
         - libvdpau-va-gl # mplayer
         - kernel-tools   # cpupower
+        - thunar
       become: true
       tags: [minimal]
