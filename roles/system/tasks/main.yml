@@ -89,3 +89,11 @@
     - name: Update font cache
       command: "fc-cache -fv {{ fonts_dir }}" # fc-list
   tags: [fonts]
+
+- name: Enable dark theme
+  block:
+    - name: Set Adwaita-dark
+      command: gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-Dark'
+
+    - name: Set prefer-dark
+      command: gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'

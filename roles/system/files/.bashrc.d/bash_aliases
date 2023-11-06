@@ -13,4 +13,5 @@ alias crt='cert="cert_`date +%s`"; vim $cert; openssl x509 -in $cert -text -noou
 alias icat="kitty +kitten icat"
 alias ssh="env TERM=xterm ssh"
 alias erase="printf '\E[H\E[3J'"
+alias tree="tree --dirsfirst"
 ##################################
