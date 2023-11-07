@@ -14,6 +14,7 @@
         - unzip
         - alsa-utils
         - bind-utils
+        - xss-lock
       become: true
       tags: [minimal]
 
