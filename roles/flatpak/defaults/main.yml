@@ -3,3 +3,4 @@ default_flatpak_packages:
   - org.gnome.World.PikaBackup
   - org.telegram.desktop
   - org.chromium.Chromium
+  - org.onlyoffice.desktopeditors

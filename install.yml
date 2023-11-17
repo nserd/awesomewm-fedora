@@ -17,6 +17,7 @@
         - xss-lock
         - light
         - acpi
+        - thunar
       become: true
       tags: [minimal]
 

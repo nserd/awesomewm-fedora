@@ -97,3 +97,22 @@
 
     - name: Set prefer-dark
       command: gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
+- name: Set default file manager
+  command: "xdg-mime default {{ file_manager }} inode/directory"
+
+- name: DNS
+  block:
+    - name: Disable systemd-resolved
+      systemd:
+        name: systemd-resolved
+        state: stopped
+        enabled: false
+      become: true
+
+    - name: Copy resolv.conf
+      template:
+        src: files/resolv.conf
+        dest: /etc/
+      become: true
+  tags: [dns]

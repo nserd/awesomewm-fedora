@@ -10,8 +10,9 @@ alias dd='dd status=progress'
 alias gerp='grep'
 alias curl-ttfb='curl -sq -o /dev/null -w "Connect: %{time_connect}\nTTFB: %{time_starttransfer}\nTotal time: %{time_total} \n"'
 alias crt='cert="cert_`date +%s`"; vim $cert; openssl x509 -in $cert -text -noout | more -11; rm $cert'
-alias icat="kitty +kitten icat"
-alias ssh="env TERM=xterm ssh"
+alias icat='kitty +kitten icat'
+alias ssh='env TERM=xterm ssh'
 alias erase="printf '\E[H\E[3J'"
-alias tree="tree --dirsfirst"
+alias tree='tree --dirsfirst'
+alias pwgen='pwgen 20'
 ##################################
