@@ -1,3 +1,10 @@
+[Added Associations]
+application/x-shellscript=code.desktop;ranger.desktop;
+application/zip=org.gnome.FileRoller.desktop;
+
+[Default Applications]
+inode/directory=thunar.desktop;
+application/zip=org.gnome.FileRoller.desktop;
 image/bmp=org.gnome.Shotwell-Viewer.desktop;
 image/gif=org.gnome.Shotwell-Viewer.desktop;
 image/jpeg=org.gnome.Shotwell-Viewer.desktop;
@@ -21,15 +28,3 @@ image/svg+xml=org.gnome.Shotwell-Viewer.desktop;
 image/svg+xml-compressed=org.gnome.Shotwell-Viewer.desktop;
 image/vnd.wap.wbmp=org.gnome.Shotwell-Viewer.desktop;
 image/x-icns=org.gnome.Shotwell-Viewer.desktop;
-nserd[~]> cat .config/mimeapps.list 
-[Added Associations]
-application/x-shellscript=code.desktop;ranger.desktop;
-application/zip=org.gnome.FileRoller.desktop;
-
-[Default Applications]
-inode/directory=thunar.desktop
-application/zip=org.gnome.FileRoller.desktop
-image/=org.gnome.Shotwell-Viewer.desktop
-
-[Removed Associations]
-application/zip=thunar.desktop;
