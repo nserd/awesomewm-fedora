@@ -98,8 +98,10 @@
     - name: Set prefer-dark
       command: gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
-- name: Set default file manager
-  command: "xdg-mime default {{ file_manager }} inode/directory"
+- name: Copy mimeapps.list
+  template:
+    src: files/mimeapps.list
+    dest: "/home/{{ user }}/.config/mimeapps.list"
 
 - name: DNS
   block:

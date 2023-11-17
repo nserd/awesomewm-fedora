@@ -1,0 +1,35 @@
+image/bmp=org.gnome.Shotwell-Viewer.desktop;
+image/gif=org.gnome.Shotwell-Viewer.desktop;
+image/jpeg=org.gnome.Shotwell-Viewer.desktop;
+image/jpg=org.gnome.Shotwell-Viewer.desktop;
+image/pjpeg=org.gnome.Shotwell-Viewer.desktop;
+image/png=org.gnome.Shotwell-Viewer.desktop;
+image/tiff=org.gnome.Shotwell-Viewer.desktop;
+image/x-bmp=org.gnome.Shotwell-Viewer.desktop;
+image/x-gray=org.gnome.Shotwell-Viewer.desktop;
+image/x-icb=org.gnome.Shotwell-Viewer.desktop;
+image/x-ico=org.gnome.Shotwell-Viewer.desktop;
+image/x-png=org.gnome.Shotwell-Viewer.desktop;
+image/x-portable-anymap=org.gnome.Shotwell-Viewer.desktop;
+image/x-portable-bitmap=org.gnome.Shotwell-Viewer.desktop;
+image/x-portable-graymap=org.gnome.Shotwell-Viewer.desktop;
+image/x-portable-pixmap=org.gnome.Shotwell-Viewer.desktop;
+image/x-xbitmap=org.gnome.Shotwell-Viewer.desktop;
+image/x-xpixmap=org.gnome.Shotwell-Viewer.desktop;
+image/x-pcx=org.gnome.Shotwell-Viewer.desktop;
+image/svg+xml=org.gnome.Shotwell-Viewer.desktop;
+image/svg+xml-compressed=org.gnome.Shotwell-Viewer.desktop;
+image/vnd.wap.wbmp=org.gnome.Shotwell-Viewer.desktop;
+image/x-icns=org.gnome.Shotwell-Viewer.desktop;
+nserd[~]> cat .config/mimeapps.list 
+[Added Associations]
+application/x-shellscript=code.desktop;ranger.desktop;
+application/zip=org.gnome.FileRoller.desktop;
+
+[Default Applications]
+inode/directory=thunar.desktop
+application/zip=org.gnome.FileRoller.desktop
+image/=org.gnome.Shotwell-Viewer.desktop
+
+[Removed Associations]
+application/zip=thunar.desktop;

@@ -77,5 +77,6 @@
         - libvdpau-va-gl # mplayer
         - kernel-tools   # cpupower
         - thunar
+        - shotwell
       become: true
       tags: [minimal]
