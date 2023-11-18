@@ -23,7 +23,7 @@
       tags: [minimal]
 
   roles:
-    - role: awesome
+    - role: awesome-xorg
       tags: [awesome, minimal]
 
     - role: flatpak

@@ -17,7 +17,7 @@
     lineinfile:
       dest: "/home/{{ user }}/.bash_profile"
       line: "[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx"
-  tags: xorg
+  tags: [xorg]
 
 - name: Install
   dnf:
