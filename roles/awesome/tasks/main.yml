@@ -37,7 +37,7 @@
 
 - name: Copy icons
   synchronize:
-    src: files/themes/mytheme/icons/Adwaita
+    src: files/icons/Adwaita
     dest: /usr/share/icons/
   become: true
 
