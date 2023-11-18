@@ -20,6 +20,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+local wireless_widget = require("awesome-wm-widgets.wireless-widget.wireless")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -316,6 +317,7 @@ awful.screen.connect_for_each_screen(function(s)
                     wibox.widget.systray(),
                     s.mylayoutbox,
                     -- mytextclock,
+                    wireless_widget({interface = "wlo1"}),
                     battery_widget({timeout = 1}),
                 },
             },
