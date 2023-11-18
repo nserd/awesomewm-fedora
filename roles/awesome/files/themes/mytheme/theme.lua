@@ -10,7 +10,7 @@ local dpi = require("beautiful.xresources").apply_dpi
 
 -- {{{ Main
 local theme = {}
-theme.wallpaper = themes_path .. "mytheme/F34_default_wallpaper_day.jpg"
+theme.wallpaper = themes_path .. "mytheme/wallpapers/F23.jpg"
 -- }}}
 
 -- {{{ Styles
