@@ -18,6 +18,7 @@
         - light
         - acpi
         - thunar
+        - cronie
       become: true
       tags: [minimal]
 
