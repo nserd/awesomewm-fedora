@@ -3,6 +3,9 @@ xset s on
 xset s {{ screen_saver_timeout }}
 xss-lock -- i3lock-configured &
 
+# Dark theme
+export GTK_THEME=Adwaita:dark
+
 # Keyboard layout
 setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"
 
