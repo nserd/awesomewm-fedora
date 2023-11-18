@@ -316,7 +316,7 @@ awful.screen.connect_for_each_screen(function(s)
                     wibox.widget.systray(),
                     s.mylayoutbox,
                     -- mytextclock,
-                    battery_widget(),
+                    battery_widget({timeout = 1}),
                 },
             },
             top = 5,
