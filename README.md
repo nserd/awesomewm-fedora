@@ -1,6 +1,9 @@
 # Fedora Awesome WM Setup
 
+![](./screenshot.png)
+
 ## Preparation
+
 Download Wi-Fi drivers (https://rpmfind.net/):
 ```
 iwlegacy-firmware
