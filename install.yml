@@ -78,5 +78,6 @@
         - kernel-tools   # cpupower
         - thunar
         - shotwell
+        - gimp
       become: true
       tags: [additional-packages]
