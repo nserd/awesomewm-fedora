@@ -79,4 +79,4 @@
         - thunar
         - shotwell
       become: true
-      tags: [minimal]
+      tags: [additional-packages]
