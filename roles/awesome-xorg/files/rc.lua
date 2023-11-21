@@ -22,6 +22,15 @@ require("awful.hotkeys_popup.keys")
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local wireless_widget = require("awesome-wm-widgets.wireless-widget.wireless")
 
+naughty.config.defaults = {
+    timeout = 5,
+    border_width = 1,
+    text = "",
+    ontop = true,
+    margin = 5,
+    position = "top_middle"
+}
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -318,7 +327,7 @@ awful.screen.connect_for_each_screen(function(s)
                     wibox.widget.systray(),
                     -- mytextclock,
                     s.mylayoutbox,
-                    wireless_widget({interface = "wlo1"}),
+                    wireless_widget({interface = "wlo1", popup_position = "top_right"}),
                     battery_widget({timeout = 1}),
                 },
             },
