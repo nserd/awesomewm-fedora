@@ -22,12 +22,22 @@ require("awful.hotkeys_popup.keys")
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 local wireless_widget = require("awesome-wm-widgets.wireless-widget.wireless")
 
+-- https://www.reddit.com/r/awesomewm/comments/b7mgtv/continuation_on_antialiasing_in_awesome/
+function rounded_rect (cr, width, height)
+    gears.shape.rounded_rect (cr, width, height, 5)
+end
+
+function rounded_bar(cr, width, height)
+    gears.shape.rounded_bar(cr, width, height)
+end
+
 naughty.config.defaults = {
     timeout = 5,
     border_width = 1,
     text = "",
     ontop = true,
     margin = 5,
+    shape = rounded_bar,
     position = "top_middle"
 }
 
@@ -225,15 +235,6 @@ local function load_tags_numb()
     end
 end
 -- }}
-
--- https://www.reddit.com/r/awesomewm/comments/b7mgtv/continuation_on_antialiasing_in_awesome/
-function rounded_rect (cr, width, height)
-    gears.shape.rounded_rect (cr, width, height, 5)
-end
-
-function rounded_bar(cr, width, height)
-    gears.shape.rounded_bar(cr, width, height)
-end
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
