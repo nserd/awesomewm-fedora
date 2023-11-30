@@ -3,6 +3,7 @@ application/x-shellscript=code.desktop;ranger.desktop;
 application/zip=org.gnome.FileRoller.desktop;
 
 [Default Applications]
+text/plain=io.typora.Typora.desktop;
 inode/directory=thunar.desktop;
 application/zip=org.gnome.FileRoller.desktop;
 image/bmp=org.gnome.Shotwell-Viewer.desktop;

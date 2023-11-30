@@ -40,6 +40,7 @@
     src: files/icons/Adwaita
     dest: /usr/share/icons/
   become: true
+  notify: update Adwaita icon cache
 
 - name: Copy config
   template:
