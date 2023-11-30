@@ -3,13 +3,13 @@
   block:
     - name: Copy global bashrc
       template:
-        src: files/bashrc
+        src: files/bash/bashrc
         dest: /etc/bashrc
       become: true
 
     - name: Copy user .bashrc
       template:
-        src: files/.bashrc
+        src: files/bash/.bashrc
         dest: "/home/{{ user }}/.bashrc"
 
     - name: Ensure {{ bashrc_dir }} dir exist
@@ -19,7 +19,7 @@
 
     - name: Copy aliases
       template:
-        src: files/.bashrc.d/bash_aliases
+        src: files/bash/.bashrc.d/bash_aliases
         dest: "{{ bashrc_dir }}/bash_aliases"
   tags: [bash]
 
