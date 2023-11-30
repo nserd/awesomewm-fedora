@@ -88,6 +88,8 @@
   synchronize:
     src: files/icons/Adwaita
     dest: /usr/share/icons/
+    rsync_opts:
+      - "--exclude=icon-theme.cache"
   become: true
   notify: update Adwaita icon cache
   tags: [icons]
