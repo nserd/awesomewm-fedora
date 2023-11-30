@@ -2,3 +2,7 @@
 - name: reload udev
   command: udevadm control --reload-rules
   become: true
+
+- name: update Adwaita icon cache
+  command: gtk-update-icon-cache /usr/share/icons/Adwaita/
+  become: true

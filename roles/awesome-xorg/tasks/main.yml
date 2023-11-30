@@ -35,13 +35,6 @@
     src: files/themes
     dest: "{{ awesome_config_dir }}/"
 
-- name: Copy Adwaita icons
-  synchronize:
-    src: files/icons/Adwaita
-    dest: /usr/share/icons/
-  become: true
-  notify: update Adwaita icon cache
-
 - name: Copy config
   template:
     src: files/rc.lua

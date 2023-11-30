@@ -84,6 +84,14 @@
       command: "fc-cache -fv {{ fonts_dir }}" # fc-list
   tags: [fonts]
 
+- name: Copy Adwaita icons
+  synchronize:
+    src: files/icons/Adwaita
+    dest: /usr/share/icons/
+  become: true
+  notify: update Adwaita icon cache
+  tags: [icons]
+
 - name: Enable dark theme
   block:
     - name: Set Adwaita-dark
