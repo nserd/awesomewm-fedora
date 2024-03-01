@@ -236,6 +236,58 @@ local function load_tags_numb()
 end
 -- }}
 
+local function create_tag(s)
+    local new_tag = awful.tag.add("    ", { screen = s, volatile = true, layout = default_tag_layout })
+    save_tags_numb(#s.tags)
+
+    return new_tag
+end
+
+local function delete_tag(current_tag, s)
+    current_tag:delete()
+    save_tags_numb(#s.tags)
+end
+
+local function next_tag()
+    awful.screen.connect_for_each_screen(function(s)
+        if s == screen.primary then
+            local current_tag = s.selected_tag
+            local clients_numb = #current_tag:clients()
+
+            -- print("next_tag(): current_tag_index = " ..  current_tag.index .. ", numb of all tags = " .. #s.tags .. ", current_tag clinets = " .. clients_numb)
+            if current_tag.index == #s.tags and clients_numb > 0 then
+                create_tag(s)
+            end
+
+            if s.selected_tag.index < #s.tags then
+                awful.tag.viewnext(s)
+            end
+
+            if clients_numb == 0 then
+                delete_tag(current_tag, s)
+            end
+        end
+    end)
+end
+
+local function prev_tag()
+    awful.screen.connect_for_each_screen(function(s)
+        if s == screen.primary then
+            local current_tag = s.selected_tag
+            local clients_numb = #current_tag:clients()
+
+            -- print("prev_tag(): current_tag_index = " ..  current_tag.index .. ", numb of all tags = " .. #s.tags .. ", current_tag clinets = " .. clients_numb)
+            if current_tag.index > 1 then
+                awful.tag.viewprev(s)
+            end
+
+            if clients_numb == 0 then
+                delete_tag(current_tag, s)
+            end
+        end
+    end)
+end
+
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
@@ -243,14 +295,12 @@ awful.screen.connect_for_each_screen(function(s)
     local tags_numb = tonumber(load_tags_numb())
     -- Each screen has its own tag table.
     if s == screen.primary and tags_numb > 0 then
-        local tags = {}
-        for i = 1, tags_numb do
-            table.insert(tags, "    ")
+        awful.tag.viewtoggle(create_tag(s))
+        for i = 2, tags_numb do
+            create_tag(s)
         end
-
-        awful.tag(tags, s, default_tag_layout)
     else
-        awful.tag({ "    " }, s, default_tag_layout)
+        awful.tag.viewtoggle(create_tag(s))
     end
 
     -- Create a promptbox for each screen
@@ -345,55 +395,6 @@ end)
 
 --- Space between windows
 beautiful.useless_gap = 5
-
-local function create_tag(s)
-    local new_tag = awful.tag.add("    ", { screen = s, volatile = true, layout = default_tag_layout })
-    save_tags_numb(#s.tags)
-
-    return new_tag
-end
-
-local function next_tag()
-    awful.screen.connect_for_each_screen(function(s)
-        if s == screen.primary then
-            local current_tag = s.selected_tag
-            local clients_numb = #current_tag:clients()
-
-            -- print("next_tag(): current_tag_index = " ..  current_tag.index .. ", numb of all tags = " .. #s.tags .. ", current_tag clinets = " .. clients_numb)
-            if current_tag.index == #s.tags and clients_numb > 0 then
-                create_tag(s)
-            end
-
-            if s.selected_tag.index < #s.tags then
-                awful.tag.viewnext(s)
-            end
-
-            if clients_numb == 0 and #s.tags > 1 then
-                current_tag:delete()
-                save_tags_numb(#s.tags)
-            end
-        end
-    end)
-end
-
-local function prev_tag()
-    awful.screen.connect_for_each_screen(function(s)
-        if s == screen.primary then
-            local current_tag = s.selected_tag
-            local clients_numb = #current_tag:clients()
-
-            -- print("prev_tag(): current_tag_index = " ..  current_tag.index .. ", numb of all tags = " .. #s.tags .. ", current_tag clinets = " .. clients_numb)
-            if current_tag.index > 1 then
-                awful.tag.viewprev(s)
-            end
-
-            if clients_numb == 0 and #s.tags > 1 then
-                current_tag:delete()
-                save_tags_numb(#s.tags)
-            end
-        end
-    end)
-end
 
 local function popup_tasklist()
     awful.popup {
