@@ -237,7 +237,7 @@ end
 -- }}
 
 local function create_tag(s)
-    local new_tag = awful.tag.add("    ", { screen = s, volatile = true, layout = default_tag_layout })
+    local new_tag = awful.tag.add("    ", { screen = s, volatile = false, layout = default_tag_layout })
     save_tags_numb(#s.tags)
 
     return new_tag
@@ -263,7 +263,7 @@ local function next_tag()
                 awful.tag.viewnext(s)
             end
 
-            if clients_numb == 0 then
+            if clients_numb == 0 and #s.tags > 1 then
                 delete_tag(current_tag, s)
             end
         end
@@ -281,7 +281,7 @@ local function prev_tag()
                 awful.tag.viewprev(s)
             end
 
-            if clients_numb == 0 then
+            if clients_numb == 0 and #s.tags > 1 then
                 delete_tag(current_tag, s)
             end
         end
