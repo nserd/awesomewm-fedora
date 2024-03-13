@@ -154,62 +154,6 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock('%b %d  %H:%M:%S', 1)
 
--- Create a wibox for each screen and add it
-local taglist_buttons = gears.table.join(
-    awful.button({ }, 1, function(t) t:view_only() end),
-    awful.button({ modkey }, 1, function(t)
-        if client.focus then
-            client.focus:move_to_tag(t)
-        end
-    end),
-    awful.button({ }, 3, awful.tag.viewtoggle),
-    awful.button({ modkey }, 3, function(t)
-        if client.focus then
-            client.focus:toggle_tag(t)
-        end
-    end),
-    awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-    awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
-)
-
-local tasklist_buttons = gears.table.join(
-    awful.button({ }, 1, function (c)
-        if c == client.focus then
-            c.minimized = true
-        else
-            c:emit_signal(
-                "request::activate",
-                "tasklist",
-                {raise = true}
-            )
-        end
-    end),
-    awful.button({ }, 3, function()
-        awful.menu.client_list({ theme = { width = 250 } })
-    end),
-    awful.button({ }, 4, function ()
-        awful.client.focus.byidx(1)
-    end),
-    awful.button({ }, 5, function ()
-        awful.client.focus.byidx(-1)
-    end)
-)
-
-local function set_wallpaper(s)
-    -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
-        -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
-        end
-        gears.wallpaper.maximized(wallpaper, s, true)
-    end
-end
-
--- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", set_wallpaper)
-
 -- {{{ Functions for save tags if awesome restarted
 local tmp_tags_file = "/tmp/tags.awesome"
 
@@ -287,6 +231,62 @@ local function prev_tag()
         end
     end)
 end
+
+-- Create a wibox for each screen and add it
+local taglist_buttons = gears.table.join(
+    awful.button({ }, 1, function(t) t:view_only() end),
+    awful.button({ modkey }, 1, function(t)
+        if client.focus then
+            client.focus:move_to_tag(t)
+        end
+    end),
+    awful.button({ }, 3, awful.tag.viewtoggle),
+    awful.button({ modkey }, 3, function(t)
+        if client.focus then
+            client.focus:toggle_tag(t)
+        end
+    end),
+    awful.button({ }, 4, prev_tag),
+    awful.button({ }, 5, next_tag)
+)
+
+local tasklist_buttons = gears.table.join(
+    awful.button({ }, 1, function (c)
+        if c == client.focus then
+            c.minimized = true
+        else
+            c:emit_signal(
+                "request::activate",
+                "tasklist",
+                {raise = true}
+            )
+        end
+    end),
+    awful.button({ }, 3, function()
+        awful.menu.client_list({ theme = { width = 250 } })
+    end),
+    awful.button({ }, 4, function ()
+        awful.client.focus.byidx(1)
+    end),
+    awful.button({ }, 5, function ()
+        awful.client.focus.byidx(-1)
+    end)
+)
+
+local function set_wallpaper(s)
+    -- Wallpaper
+    if beautiful.wallpaper then
+        local wallpaper = beautiful.wallpaper
+        -- If wallpaper is a function, call it with the screen
+        if type(wallpaper) == "function" then
+            wallpaper = wallpaper(s)
+        end
+        gears.wallpaper.maximized(wallpaper, s, true)
+    end
+end
+
+-- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
+screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
@@ -646,11 +646,11 @@ for i = 1, 9 do
         awful.key({ modkey, "Shift" }, "#" .. i + 9,
             function ()
                 if client.focus then
-                    local tag = client.focus.screen.tags[i]
+                    local tag = screen.primary.tags[i]
                     if tag then
                         client.focus:move_to_tag(tag)
-                    elseif client.focus.screen == screen.primary then
-                        client.focus:move_to_tag(create_tag(client.focus.screen))
+                    else
+                        client.focus:move_to_tag(create_tag(screen.primary))
                     end
                 end
             end,
@@ -825,7 +825,9 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.spawn.with_shell(
     'which picom &>/dev/null && [ $(pgrep -x picom | wc -l) == 0 ] && picom -b;' ..
     '[ $(pgrep -x i3lock | wc -l) != 0 ] && pkill -9 i3lock && loginctl lock-session;' .. -- Fix a problem with showing windows on top of locker. TODO: find better solution
-    'setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"'
+    'setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle";' ..
+    'libinput-gestures-setup start;' ..
+    'xinput set-prop "GDX1515:00 27C6:01F4 Touchpad" "libinput Tapping Enabled" 1'
 )
 --- }}}
 {% endraw %}
