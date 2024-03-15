@@ -36,9 +36,15 @@ naughty.config.defaults = {
     border_width = 1,
     text = "",
     ontop = true,
-    margin = 5,
-    shape = rounded_bar,
-    position = "top_middle"
+    margin = 10,
+    padding = 10,
+    width = 500,
+    max_queued_notifications = 4,
+    border_color = '#51a2da',
+    shape = function(cr, width, height)
+        gears.shape.rounded_rect(cr, width, height, 16)
+    end,
+    position = "top_right"
 }
 
 -- {{{ Error handling
