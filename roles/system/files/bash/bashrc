@@ -95,6 +95,8 @@ if [ -z "$BASHRCSOURCED" ]; then
 fi
 
 # History settings
+shopt -s histappend
+export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 export HISTTIMEFORMAT="[%Y-%m-%d %T] "
 export HISTCONTROL="ignoredups"
 export HISTSIZE=10000
